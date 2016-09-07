@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D60FEB821D69A99900E3D7F2"
-               BuildableName = "StripCam.app"
-               BlueprintName = "StripCam"
-               ReferencedContainer = "container:StripCam.xcodeproj">
+               BuildableName = "GarbageCam.app"
+               BlueprintName = "GarbageCam"
+               ReferencedContainer = "container:GarbageCam.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D60FEB821D69A99900E3D7F2"
-            BuildableName = "StripCam.app"
-            BlueprintName = "StripCam"
-            ReferencedContainer = "container:StripCam.xcodeproj">
+            BuildableName = "GarbageCam.app"
+            BlueprintName = "GarbageCam"
+            ReferencedContainer = "container:GarbageCam.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D60FEB821D69A99900E3D7F2"
-            BuildableName = "StripCam.app"
-            BlueprintName = "StripCam"
-            ReferencedContainer = "container:StripCam.xcodeproj">
+            BuildableName = "GarbageCam.app"
+            BlueprintName = "GarbageCam"
+            ReferencedContainer = "container:GarbageCam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D60FEB821D69A99900E3D7F2"
-            BuildableName = "StripCam.app"
-            BlueprintName = "StripCam"
-            ReferencedContainer = "container:StripCam.xcodeproj">
+            BuildableName = "GarbageCam.app"
+            BlueprintName = "GarbageCam"
+            ReferencedContainer = "container:GarbageCam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

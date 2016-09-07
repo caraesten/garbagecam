@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */; };
-		D60FEB891D69A99C00E3D7F2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB881D69A99C00E3D7F2 /* ViewController.swift */; };
+		D60FEB891D69A99C00E3D7F2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */; };
 		D60FEB8C1D69A99C00E3D7F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */; };
 		D60FEB8E1D69A99C00E3D7F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */; };
 		D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */; };
@@ -22,9 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D60FEB831D69A99900E3D7F2 /* StripCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StripCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D60FEB831D69A99900E3D7F2 /* GarbageCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GarbageCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D60FEB881D69A99C00E3D7F2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		D60FEB8B1D69A99C00E3D7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D60FEB901D69A99C00E3D7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 				D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */,
 				D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */,
 				D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */,
-				D60FEB851D69A99C00E3D7F2 /* StripCam */,
+				D60FEB851D69A99C00E3D7F2 /* GarbageCam */,
 				D60FEB841D69A99900E3D7F2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,16 +66,16 @@
 		D60FEB841D69A99900E3D7F2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D60FEB831D69A99900E3D7F2 /* StripCam.app */,
+				D60FEB831D69A99900E3D7F2 /* GarbageCam.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D60FEB851D69A99C00E3D7F2 /* StripCam */ = {
+		D60FEB851D69A99C00E3D7F2 /* GarbageCam */ = {
 			isa = PBXGroup;
 			children = (
 				D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */,
-				D60FEB881D69A99C00E3D7F2 /* ViewController.swift */,
+				D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */,
 				D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */,
 				D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */,
 				D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */,
@@ -85,15 +85,16 @@
 				D69733CA1D8048EB0035F833 /* ImageProcessor.swift */,
 				D69733CC1D8049420035F833 /* StripProcessor.swift */,
 			);
+			name = GarbageCam;
 			path = StripCam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D60FEB821D69A99900E3D7F2 /* StripCam */ = {
+		D60FEB821D69A99900E3D7F2 /* GarbageCam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D60FEB951D69A99C00E3D7F2 /* Build configuration list for PBXNativeTarget "StripCam" */;
+			buildConfigurationList = D60FEB951D69A99C00E3D7F2 /* Build configuration list for PBXNativeTarget "GarbageCam" */;
 			buildPhases = (
 				D60FEB7F1D69A99900E3D7F2 /* Sources */,
 				D60FEB801D69A99900E3D7F2 /* Frameworks */,
@@ -103,9 +104,9 @@
 			);
 			dependencies = (
 			);
-			name = StripCam;
+			name = GarbageCam;
 			productName = StripCam;
-			productReference = D60FEB831D69A99900E3D7F2 /* StripCam.app */;
+			productReference = D60FEB831D69A99900E3D7F2 /* GarbageCam.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -124,7 +125,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D60FEB7E1D69A99900E3D7F2 /* Build configuration list for PBXProject "StripCam" */;
+			buildConfigurationList = D60FEB7E1D69A99900E3D7F2 /* Build configuration list for PBXProject "GarbageCam" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -137,7 +138,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D60FEB821D69A99900E3D7F2 /* StripCam */,
+				D60FEB821D69A99900E3D7F2 /* GarbageCam */,
 			);
 		};
 /* End PBXProject section */
@@ -160,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D60FEB891D69A99C00E3D7F2 /* ViewController.swift in Sources */,
+				D60FEB891D69A99C00E3D7F2 /* CameraViewController.swift in Sources */,
 				D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */,
 				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
 				D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */,
@@ -282,8 +283,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = StripCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.stripCam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
+				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -296,8 +297,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = StripCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.stripCam;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
+				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -305,7 +306,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D60FEB7E1D69A99900E3D7F2 /* Build configuration list for PBXProject "StripCam" */ = {
+		D60FEB7E1D69A99900E3D7F2 /* Build configuration list for PBXProject "GarbageCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D60FEB931D69A99C00E3D7F2 /* Debug */,
@@ -314,7 +315,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D60FEB951D69A99C00E3D7F2 /* Build configuration list for PBXNativeTarget "StripCam" */ = {
+		D60FEB951D69A99C00E3D7F2 /* Build configuration list for PBXNativeTarget "GarbageCam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D60FEB961D69A99C00E3D7F2 /* Debug */,

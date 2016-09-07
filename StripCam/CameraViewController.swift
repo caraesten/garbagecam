@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  StripCam
+//  GarbageCam
 //
 //  Created by Esten Hurtle on 8/21/16.
 //  Copyright © 2016 Esten Hurtle. All rights reserved.
@@ -11,7 +11,7 @@ import AVFoundation
 import CoreVideo
 import CoreGraphics
 
-class ViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate {
+class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate {
     var mCameraController: CameraController?
         
     var mSaveDialog: ImageViewController?
@@ -39,7 +39,7 @@ class ViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mCameraController = CameraController(processor: StripProcessor(), delegate: self, queueName: "com.estenh.StripCameraQueue")
+        mCameraController = CameraController(processor: StripProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
         // Do any additional setup after loading the view, typically from a nib.
         mCameraController!.setupSession(self.view)
     }
@@ -70,7 +70,7 @@ class ViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate 
     
     func onSaved() {
         if let image = mCameraController!.processedImage {
-            UIImageWriteToSavedPhotosAlbum(image, self, #selector(ViewController.photoSaved(_:didFinishSavingWithError:contextInfo:)), nil)
+            UIImageWriteToSavedPhotosAlbum(image, self, #selector(CameraViewController.photoSaved(_:didFinishSavingWithError:contextInfo:)), nil)
         } else {
             onDismissed()
         }

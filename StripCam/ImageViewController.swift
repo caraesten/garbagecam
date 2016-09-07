@@ -1,6 +1,6 @@
 //
 //  ImageViewController.swift
-//  StripCam
+//  GarbageCam
 //
 //  Created by Esten Hurtle on 8/21/16.
 //  Copyright © 2016 Esten Hurtle. All rights reserved.

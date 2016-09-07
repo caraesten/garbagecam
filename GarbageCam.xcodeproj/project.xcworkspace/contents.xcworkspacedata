@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:StripCam.xcodeproj">
+      location = "self:/Users/estenh/workspace/StripCam/GarbageCam.xcodeproj">
    </FileRef>
 </Workspace>

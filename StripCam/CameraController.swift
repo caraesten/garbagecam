@@ -1,6 +1,6 @@
 //
 //  CameraController.swift
-//  StripCam
+//  GarbageCam
 //
 //  Created by Esten Hurtle on 9/7/16.
 //  Copyright © 2016 Esten Hurtle. All rights reserved.
@@ -13,7 +13,7 @@ import CoreVideo
 import CoreGraphics
 
 class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-    static let DEFAULT_QUEUE_NAME = "com.estenh.StripCameraQueue"
+    static let DEFAULT_QUEUE_NAME = "com.estenh.GarbageCameraQueue"
     
     var processedImage:UIImage? {
         get {
