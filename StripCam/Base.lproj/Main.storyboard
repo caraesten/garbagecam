@@ -9,7 +9,7 @@
         <!--Image View Controller-->
         <scene sceneID="Y45-mw-y3W">
             <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="Uq2-SE-wCp" customClass="ImageViewController" customModule="StripCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageViewController" id="Uq2-SE-wCp" customClass="ImageViewController" customModule="GarbageCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mw8-dz-s14"/>
                         <viewControllerLayoutGuide type="bottom" id="UsX-4p-jiu"/>
@@ -63,7 +63,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="hW8-um-p8c" id="Lb2-BE-HSG"/>
+                        <outlet property="mImageView" destination="hW8-um-p8c" id="fGf-fB-hXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVf-Zo-988" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -73,7 +73,7 @@
         <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CameraViewController" customModule="StripCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CameraViewController" customModule="GarbageCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

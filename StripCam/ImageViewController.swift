@@ -10,23 +10,24 @@ import Foundation
 import UIKit
 
 class ImageViewController: UIViewController {
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var mImageView: UIImageView!
     
-    var imageTaken: UIImage?
+    private var mImageTaken: UIImage?
     
-    var imageSaver: ImageSaverDelegate?
+    private var mImageSaver: ImageSaverDelegate?
     
     @IBAction func discardClicked(sender: UIButton) {
-        self.imageSaver?.onDismissed()
+        self.mImageSaver?.onDismissed()
     }
+    
     @IBAction func saveClicked(sender: UIButton) {
-        self.imageSaver?.onSaved()
+        self.mImageSaver?.onSaved()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let image = imageTaken {
-            imageView.image = image
+        if let image = mImageTaken {
+            mImageView.image = image
         }
     }
     
@@ -35,9 +36,9 @@ class ImageViewController: UIViewController {
     }
     
     func setImage(image: UIImage, delegate: ImageSaverDelegate) {
-        imageTaken = image
-        imageSaver = delegate
-        if let view = imageView {
+        mImageTaken = image
+        mImageSaver = delegate
+        if let view = mImageView {
             view.image = image
         }
     }
