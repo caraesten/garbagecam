@@ -9,5 +9,5 @@ As you can tell, this is my first time writing swift. I am probably bad at it. I
 
 ----
 
-Images are courtesy of [image8](https://icons8.com/license/).
+Images are courtesy of [icons8](https://icons8.com/license/).
 
