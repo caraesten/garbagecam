@@ -115,7 +115,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             dataOut.setSampleBufferDelegate(self, queue: mQueue)
             
         } catch let error as NSError {
-            NSLog("SHIT: %@", error.localizedDescription)
+            NSLog("ERROR: %@", error.localizedDescription)
         }
     }
     
