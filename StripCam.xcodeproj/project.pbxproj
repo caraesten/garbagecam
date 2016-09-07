@@ -12,6 +12,13 @@
 		D60FEB8C1D69A99C00E3D7F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */; };
 		D60FEB8E1D69A99C00E3D7F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */; };
 		D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */; };
+		D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */; };
+		D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */; };
+		D659CAA21D69CE6500509DE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */; };
+		D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690B24A1D6A12A000F0760D /* ImageViewController.swift */; };
+		D69733C91D8042A30035F833 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733C81D8042A30035F833 /* CameraController.swift */; };
+		D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CA1D8048EB0035F833 /* ImageProcessor.swift */; };
+		D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CC1D8049420035F833 /* StripProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +29,13 @@
 		D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D60FEB901D69A99C00E3D7F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D60FEB921D69A99C00E3D7F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D690B24A1D6A12A000F0760D /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		D69733C81D8042A30035F833 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
+		D69733CA1D8048EB0035F833 /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
+		D69733CC1D8049420035F833 /* StripProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +43,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D659CAA21D69CE6500509DE4 /* CoreGraphics.framework in Frameworks */,
+				D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */,
+				D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +55,9 @@
 		D60FEB7A1D69A99900E3D7F2 = {
 			isa = PBXGroup;
 			children = (
+				D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */,
+				D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */,
+				D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */,
 				D60FEB851D69A99C00E3D7F2 /* StripCam */,
 				D60FEB841D69A99900E3D7F2 /* Products */,
 			);
@@ -60,6 +80,10 @@
 				D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */,
 				D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */,
 				D60FEB921D69A99C00E3D7F2 /* Info.plist */,
+				D690B24A1D6A12A000F0760D /* ImageViewController.swift */,
+				D69733C81D8042A30035F833 /* CameraController.swift */,
+				D69733CA1D8048EB0035F833 /* ImageProcessor.swift */,
+				D69733CC1D8049420035F833 /* StripProcessor.swift */,
 			);
 			path = StripCam;
 			sourceTree = "<group>";
@@ -96,6 +120,7 @@
 				TargetAttributes = {
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = HES75F3C63;
 					};
 				};
 			};
@@ -136,6 +161,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60FEB891D69A99C00E3D7F2 /* ViewController.swift in Sources */,
+				D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */,
+				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
+				D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */,
+				D69733C91D8042A30035F833 /* CameraController.swift in Sources */,
 				D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,10 +278,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = StripCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenh.StripCam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.stripCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -260,10 +292,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = StripCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenh.StripCam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.stripCam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -286,6 +321,7 @@
 				D60FEB971D69A99C00E3D7F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
