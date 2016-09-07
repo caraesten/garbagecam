@@ -21,6 +21,7 @@
 		D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CC1D8049420035F833 /* StripProcessor.swift */; };
 		D6E9BFEF1D80615600A4029B /* CaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */; };
 		D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */; };
+		D6E9BFF31D809C5100A4029B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFF21D809C5100A4029B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		D69733CC1D8049420035F833 /* StripProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripProcessor.swift; sourceTree = "<group>"; };
 		D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureProcessor.swift; sourceTree = "<group>"; };
 		D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripCaptureProcessor.swift; sourceTree = "<group>"; };
+		D6E9BFF21D809C5100A4029B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				D69733CC1D8049420035F833 /* StripProcessor.swift */,
 				D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */,
 				D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */,
+				D6E9BFF21D809C5100A4029B /* README.md */,
 			);
 			path = GarbageCam;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
 				D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */,
 				D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */,
+				D6E9BFF31D809C5100A4029B /* README.md in Sources */,
 				D69733C91D8042A30035F833 /* CameraController.swift in Sources */,
 				D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */,
 			);
