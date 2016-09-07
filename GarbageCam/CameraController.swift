@@ -156,7 +156,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func finishRecording() {
-        
+        mDelegate.onRecordingFinished()
     }
     
     // Returns new state
