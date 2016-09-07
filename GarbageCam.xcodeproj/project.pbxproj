@@ -86,7 +86,7 @@
 				D69733CC1D8049420035F833 /* StripProcessor.swift */,
 			);
 			name = GarbageCam;
-			path = StripCam;
+			path = GarbageCam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,7 +105,7 @@
 			dependencies = (
 			);
 			name = GarbageCam;
-			productName = StripCam;
+			productName = GarbageCam;
 			productReference = D60FEB831D69A99900E3D7F2 /* GarbageCam.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -281,7 +281,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = StripCam/Info.plist;
+				INFOPLIST_FILE = GarbageCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
 				PRODUCT_NAME = GarbageCam;
@@ -295,7 +295,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				INFOPLIST_FILE = StripCam/Info.plist;
+				INFOPLIST_FILE = GarbageCam/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
 				PRODUCT_NAME = GarbageCam;
