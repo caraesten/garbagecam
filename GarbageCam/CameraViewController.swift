@@ -39,7 +39,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mCameraController = CameraController(processor: StripProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+        mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
         // Do any additional setup after loading the view, typically from a nib.
         mCameraController!.setupSession(self.view)
     }

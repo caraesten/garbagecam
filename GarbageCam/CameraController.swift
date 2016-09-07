@@ -32,6 +32,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private let mQueue: dispatch_queue_t
     private let mQueueName: String
     private let mProcessor: ImageProcessor
+    private let mCaptureProcessor: CaptureProcessor
     private let mDelegate: CameraEventDelegate
     
     private var mIsRecording:Bool = false
@@ -46,7 +47,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return s
     }()
     
-    init(processor: ImageProcessor, delegate: CameraEventDelegate, queueName: String?) {
+    init(processor: ImageProcessor, captureProcessor: CaptureProcessor, delegate: CameraEventDelegate, queueName: String?) {
         if let qn = queueName {
             mQueueName = qn
         } else {
@@ -54,6 +55,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
         mQueue = dispatch_queue_create(mQueueName, DISPATCH_QUEUE_SERIAL)
         mProcessor = processor
+        mCaptureProcessor = captureProcessor
         mDelegate = delegate
     }
     
@@ -185,26 +187,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     @objc func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         if (mIsRecording) {
-            let buf = CMSampleBufferGetImageBuffer(sampleBuffer)!
-            CVPixelBufferLockBaseAddress(buf, 0)
-            
-            let stride = CVPixelBufferGetBytesPerRow(buf)
-            let width = CVPixelBufferGetWidth(buf)
-            let srcBuf = CVPixelBufferGetBaseAddress(buf)
-            // TODO: Instead of capturing an array of 1px wide UIImages, just capture pixel data as a buffer.
-            // This seemed like a pain in the ass for now though
-            
-            let colorSpace = CGColorSpaceCreateDeviceRGB()
-            
-            let context = CGBitmapContextCreate(srcBuf, width, 1, 8, stride, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue);
-            
-            let quartzImage = CGBitmapContextCreateImage(context)
-            
-            let img = UIImage(CGImage: quartzImage!, scale:1, orientation:.Right)
-            
-            
-            CVPixelBufferUnlockBaseAddress(buf, 0)
-            
+            let img = mCaptureProcessor.process(sampleBuffer)
             mCurrentData.append(img)
         }
     }

@@ -19,6 +19,8 @@
 		D69733C91D8042A30035F833 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733C81D8042A30035F833 /* CameraController.swift */; };
 		D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CA1D8048EB0035F833 /* ImageProcessor.swift */; };
 		D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CC1D8049420035F833 /* StripProcessor.swift */; };
+		D6E9BFEF1D80615600A4029B /* CaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */; };
+		D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		D69733C81D8042A30035F833 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		D69733CA1D8048EB0035F833 /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		D69733CC1D8049420035F833 /* StripProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripProcessor.swift; sourceTree = "<group>"; };
+		D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureProcessor.swift; sourceTree = "<group>"; };
+		D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripCaptureProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +88,9 @@
 				D69733C81D8042A30035F833 /* CameraController.swift */,
 				D69733CA1D8048EB0035F833 /* ImageProcessor.swift */,
 				D69733CC1D8049420035F833 /* StripProcessor.swift */,
+				D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */,
+				D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */,
 			);
-			name = GarbageCam;
 			path = GarbageCam;
 			sourceTree = "<group>";
 		};
@@ -162,8 +167,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D60FEB891D69A99C00E3D7F2 /* CameraViewController.swift in Sources */,
+				D6E9BFEF1D80615600A4029B /* CaptureProcessor.swift in Sources */,
 				D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */,
 				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
+				D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */,
 				D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */,
 				D69733C91D8042A30035F833 /* CameraController.swift in Sources */,
 				D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */,
