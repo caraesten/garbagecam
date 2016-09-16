@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreMedia
+import CoreImage
 
 // A capture processor describes which parts of the hardware image buffer to capture
 // as a UIImage. By default, captures the whole image.
@@ -17,18 +18,21 @@ class CaptureProcessor {
         let buf = CMSampleBufferGetImageBuffer(sampleBuffer)!
         CVPixelBufferLockBaseAddress(buf, 0)
         
-        let stride = CVPixelBufferGetBytesPerRow(buf)
         let width = CVPixelBufferGetWidth(buf)
         let height = CVPixelBufferGetHeight(buf)
-        let srcBuf = CVPixelBufferGetBaseAddress(buf)
         
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let ciImg = CIImage(CVPixelBuffer: buf)
         
-        let context = CGBitmapContextCreate(srcBuf, getCaptureWidth(width), getCaptureHeight(height), 8, stride, colorSpace, CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue);
-        
-        let quartzImage = CGBitmapContextCreateImage(context)
-        
-        let img = UIImage(CGImage: quartzImage!, scale:1, orientation:.Right)
+        let cropped = ciImg.imageByCroppingToRect(
+            CGRect(
+                x: getCaptureOffsetX(),
+                y: getCaptureOffsetY(),
+                width: getCaptureWidth(width),
+                height: getCaptureHeight(height)
+            )
+        )
+
+        let img = UIImage(CIImage: cropped, scale:1, orientation:.Right)
         
         CVPixelBufferUnlockBaseAddress(buf, 0)
         
@@ -41,5 +45,13 @@ class CaptureProcessor {
     
     func getCaptureHeight(bufHeight: Int) -> Int {
         return bufHeight
+    }
+    
+    func getCaptureOffsetX() -> Int {
+        return 0
+    }
+    
+    func getCaptureOffsetY() -> Int {
+        return 0
     }
 }
