@@ -16,16 +16,13 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         
     var mSaveDialog: ImageViewController?
     
+    @IBOutlet var mRecordingButton: UIButton?
+    
     @IBAction func buttonClicked(sender: UIButton) {
         if (mCameraController!.toggleRecording()) {
-            sender.setImage(UIImage(named: "novideo"), forState: UIControlState.Normal)
-            UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .BeginFromCurrentState, .AllowUserInteraction], animations: {() in
-                sender.alpha = 0.5;
-                }, completion: nil)
+            setButtonRecordingOn()
         } else {
-            sender.layer.removeAllAnimations()
-            sender.alpha = 0.8
-            sender.setImage(UIImage(named: "video"), forState: UIControlState.Normal)
+            setButtonRecordingOff()
         }
     }
     
@@ -37,9 +34,33 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         }
     }
     
+    func setButtonRecordingOff() {
+        if let button = mRecordingButton {
+            // TODO: this is still not working sometimes, no clue why
+            CATransaction.begin()
+            button.layer.removeAllAnimations()
+            CATransaction.commit()
+            button.alpha = 0.8
+            button.setImage(UIImage(named: "video"), forState: UIControlState.Normal)
+        }
+    }
+    
+    func setButtonRecordingOn() {
+        if let button = mRecordingButton {
+            button.setImage(UIImage(named: "novideo"), forState: UIControlState.Normal)
+            UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .BeginFromCurrentState, .AllowUserInteraction], animations: {() in
+                button.alpha = 0.5;
+                }, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+
+        /* For grid capture
+        mCameraController = CameraController(processor: TileProcessor(columns: 40, rows: 40), captureProcessor: TileCaptureProcessor(columns: 40, rows: 40), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+         */
         // Do any additional setup after loading the view, typically from a nib.
         mCameraController!.setupSession(self.view)
     }
@@ -55,6 +76,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     }
     
     func onRecordingFinished() {
+        setButtonRecordingOff()
         showSaveDialog()
     }
     

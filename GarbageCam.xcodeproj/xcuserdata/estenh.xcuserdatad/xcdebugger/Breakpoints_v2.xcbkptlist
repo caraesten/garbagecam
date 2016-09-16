@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "GarbageCam/CaptureProcessor.swift"
-            timestampString = "495700422.064421"
+            filePath = "GarbageCam/TileCaptureProcessor.swift"
+            timestampString = "495707718.233352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "process(_:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "getCaptureOffsetY(_:bufWidth:bufHeight:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,44 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GarbageCam/CaptureProcessor.swift"
-            timestampString = "495700490.889955"
+            timestampString = "495707637.246221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "process(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GarbageCam/StripProcessor.swift"
-            timestampString = "495700635.569752"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "process(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "GarbageCam/StripProcessor.swift"
-            timestampString = "495700688.705715"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "process(_:)"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "process(_:frameCount:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -90,6 +90,8 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 cameraSession.addOutput(dataOut)
             }
             
+            // TODO: Add selection of mode (> resolution than 720p for grid capture would be nice, 4k would be incredible)
+            
             // MAX POWER
             var curMax = 0.0
             if let device = mCaptureDevice {
@@ -156,6 +158,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     func finishRecording() {
+        mIsRecording = false
         mDelegate.onRecordingFinished()
     }
     
@@ -183,11 +186,15 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func clearData() {
         mCurrentData.removeAll()
+        mFinalImage = nil
     }
     
     @objc func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-        if (mIsRecording) {
-            let img = mCaptureProcessor.process(sampleBuffer)
+        let isDone =  mCaptureProcessor.isDone(mCurrentData.count)
+        if (mIsRecording && isDone) {
+            finishRecording()
+        } else if (mIsRecording) {
+            let img = mCaptureProcessor.process(sampleBuffer, frameCount: mCurrentData.count)
             mCurrentData.append(img)
         }
     }

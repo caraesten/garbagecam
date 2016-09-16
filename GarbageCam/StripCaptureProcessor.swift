@@ -10,8 +10,8 @@ import Foundation
 
 class StripCaptureProcessor: CaptureProcessor {
     
-    // For the strip camera, just return 1 height
-    override func getCaptureHeight(bufHeight: Int) -> Int {
+    // For the strip camera, just return 1 width
+    override func getCaptureWidth(bufWidth: Int) -> Int {
         return 1
     }
 }

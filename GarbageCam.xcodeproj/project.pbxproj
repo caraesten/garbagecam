@@ -14,6 +14,8 @@
 		D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */; };
 		D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */; };
 		D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */; };
+		D619A7371D8BD1DA004F498A /* TileCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D619A7361D8BD1DA004F498A /* TileCaptureProcessor.swift */; };
+		D619A7391D8BD9D4004F498A /* TileProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D619A7381D8BD9D4004F498A /* TileProcessor.swift */; };
 		D659CAA21D69CE6500509DE4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */; };
 		D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690B24A1D6A12A000F0760D /* ImageViewController.swift */; };
 		D69733C91D8042A30035F833 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733C81D8042A30035F833 /* CameraController.swift */; };
@@ -34,6 +36,8 @@
 		D60FEB921D69A99C00E3D7F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D619A7361D8BD1DA004F498A /* TileCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCaptureProcessor.swift; sourceTree = "<group>"; };
+		D619A7381D8BD9D4004F498A /* TileProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileProcessor.swift; sourceTree = "<group>"; };
 		D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D690B24A1D6A12A000F0760D /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		D69733C81D8042A30035F833 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -80,21 +84,39 @@
 		D60FEB851D69A99C00E3D7F2 /* GarbageCam */ = {
 			isa = PBXGroup;
 			children = (
+				D619A7351D8BD1BC004F498A /* TileCam */,
+				D619A7341D8BD1A0004F498A /* StripCam */,
 				D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */,
 				D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */,
+				D690B24A1D6A12A000F0760D /* ImageViewController.swift */,
 				D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */,
 				D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */,
 				D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */,
 				D60FEB921D69A99C00E3D7F2 /* Info.plist */,
-				D690B24A1D6A12A000F0760D /* ImageViewController.swift */,
 				D69733C81D8042A30035F833 /* CameraController.swift */,
 				D69733CA1D8048EB0035F833 /* ImageProcessor.swift */,
-				D69733CC1D8049420035F833 /* StripProcessor.swift */,
 				D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */,
-				D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */,
 				D6E9BFF21D809C5100A4029B /* README.md */,
 			);
 			path = GarbageCam;
+			sourceTree = "<group>";
+		};
+		D619A7341D8BD1A0004F498A /* StripCam */ = {
+			isa = PBXGroup;
+			children = (
+				D69733CC1D8049420035F833 /* StripProcessor.swift */,
+				D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */,
+			);
+			name = StripCam;
+			sourceTree = "<group>";
+		};
+		D619A7351D8BD1BC004F498A /* TileCam */ = {
+			isa = PBXGroup;
+			children = (
+				D619A7361D8BD1DA004F498A /* TileCaptureProcessor.swift */,
+				D619A7381D8BD9D4004F498A /* TileProcessor.swift */,
+			);
+			name = TileCam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -176,6 +198,8 @@
 				D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */,
 				D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */,
 				D6E9BFF31D809C5100A4029B /* README.md in Sources */,
+				D619A7391D8BD9D4004F498A /* TileProcessor.swift in Sources */,
+				D619A7371D8BD1DA004F498A /* TileCaptureProcessor.swift in Sources */,
 				D69733C91D8042A30035F833 /* CameraController.swift in Sources */,
 				D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */,
 			);
