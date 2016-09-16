@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GarbageCam/TileCaptureProcessor.swift"
-            timestampString = "495707718.233352"
+            timestampString = "495733843.475655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "getCaptureOffsetY(_:bufWidth:bufHeight:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GarbageCam/CaptureProcessor.swift"
-            timestampString = "495707637.246221"
+            timestampString = "495733843.475655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "process(_:frameCount:)"
             landmarkType = "5">
          </BreakpointContent>

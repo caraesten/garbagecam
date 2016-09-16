@@ -11,14 +11,14 @@ import UIKit
 import CoreGraphics
 
 class StripProcessor: ImageProcessor {
-    override func process(imageSet: [UIImage]) -> UIImage {
-        let size = CGSizeMake(CGFloat(imageSet.count), 1280)
+    override func process(_ imageSet: [UIImage]) -> UIImage {
+        let size = CGSize(width: CGFloat(imageSet.count), height: 1280)
         UIGraphicsBeginImageContext(size)
-        for (index, img) in imageSet.enumerate() {
-            img.drawAtPoint(CGPoint(x: index,y: 0))
+        for (index, img) in imageSet.enumerated() {
+            img.draw(at: CGPoint(x: index,y: 0))
         }
         let finalImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return finalImage
+        return finalImage!
     }
 }

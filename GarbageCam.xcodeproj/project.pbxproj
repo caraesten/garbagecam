@@ -152,6 +152,7 @@
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = HES75F3C63;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -321,6 +322,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
 				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -335,6 +337,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
 				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

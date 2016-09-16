@@ -29,20 +29,20 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    private let mQueue: dispatch_queue_t
-    private let mQueueName: String
-    private let mProcessor: ImageProcessor
-    private let mCaptureProcessor: CaptureProcessor
-    private let mDelegate: CameraEventDelegate
+    fileprivate let mQueue: DispatchQueue
+    fileprivate let mQueueName: String
+    fileprivate let mProcessor: ImageProcessor
+    fileprivate let mCaptureProcessor: CaptureProcessor
+    fileprivate let mDelegate: CameraEventDelegate
     
-    private var mIsRecording:Bool = false
-    private var mIsExposureLocked:Bool = false
-    private var mCurrentData:[UIImage] = [UIImage]()
-    private var mFinalImage:UIImage?
-    private var mCaptureDevice: AVCaptureDevice?
+    fileprivate var mIsRecording:Bool = false
+    fileprivate var mIsExposureLocked:Bool = false
+    fileprivate var mCurrentData:[UIImage] = [UIImage]()
+    fileprivate var mFinalImage:UIImage?
+    fileprivate var mCaptureDevice: AVCaptureDevice?
     
-    private lazy var cameraSession: AVCaptureSession = {
-        let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+    fileprivate lazy var cameraSession: AVCaptureSession = {
+        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         let s = AVCaptureSession()
         return s
     }()
@@ -53,7 +53,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         } else {
             mQueueName = CameraController.DEFAULT_QUEUE_NAME
         }
-        mQueue = dispatch_queue_create(mQueueName, DISPATCH_QUEUE_SERIAL)
+        mQueue = DispatchQueue(label: mQueueName, attributes: [])
         mProcessor = processor
         mCaptureProcessor = captureProcessor
         mDelegate = delegate
@@ -71,10 +71,10 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return mProcessor.process(mCurrentData)
     }
     
-    func setupSession(view: UIView) {
+    func setupSession(_ view: UIView) {
         preparePreviewLayer(view)
         
-        mCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        mCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         do {
             let input = try AVCaptureDeviceInput(device: mCaptureDevice)
             cameraSession.beginConfiguration()
@@ -83,7 +83,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 cameraSession.addInput(input)
             }
             let dataOut = AVCaptureVideoDataOutput()
-            dataOut.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(unsignedInt: kCVPixelFormatType_32BGRA)]
+            dataOut.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA as UInt32)]
             dataOut.alwaysDiscardsLateVideoFrames = false
             
             if (cameraSession.canAddOutput(dataOut)) {
@@ -96,7 +96,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             var curMax = 0.0
             if let device = mCaptureDevice {
                 for format in device.formats {
-                    let ranges = format.videoSupportedFrameRateRanges as! [AVFrameRateRange]
+                    let ranges = (format as AnyObject).videoSupportedFrameRateRanges as! [AVFrameRateRange]
                     let rates = ranges[0]
                     
                     if (rates.maxFrameRate > curMax) {
@@ -129,7 +129,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             if let device = mCaptureDevice {
                 do {
                     try device.lockForConfiguration()
-                    device.focusMode = AVCaptureFocusMode.Locked
+                    device.focusMode = AVCaptureFocusMode.locked
                     device.unlockForConfiguration()
                 } catch let e as NSError {
                     NSLog("Couldn't configure focus: %@", e.localizedDescription)
@@ -140,7 +140,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             if let device = mCaptureDevice {
                 do {
                     try device.lockForConfiguration()
-                    device.focusMode = AVCaptureFocusMode.AutoFocus
+                    device.focusMode = AVCaptureFocusMode.autoFocus
                     device.unlockForConfiguration()
                 } catch let e as NSError {
                     NSLog("Couldn't configure focus: %@", e.localizedDescription)
@@ -149,7 +149,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             mIsRecording = false
             if (mCurrentData.count > 0) {
                 // Enqueue a finish, wait for frames to process
-                dispatch_async(mQueue, {() in
+                mQueue.async(execute: {() in
                     self.finishRecording()
                 })
             }
@@ -168,11 +168,11 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             do {
                 try device.lockForConfiguration()
                 let newState: Bool
-                if (device.exposureMode != .Locked) {
-                    device.exposureMode = .Locked
+                if (device.exposureMode != .locked) {
+                    device.exposureMode = .locked
                     newState = true
                 } else {
-                    device.exposureMode = .ContinuousAutoExposure
+                    device.exposureMode = .continuousAutoExposure
                     newState = false
                 }
                 device.unlockForConfiguration()
@@ -189,7 +189,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         mFinalImage = nil
     }
     
-    @objc func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+    @objc func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         let isDone =  mCaptureProcessor.isDone(mCurrentData.count)
         if (mIsRecording && isDone) {
             finishRecording()
@@ -199,13 +199,13 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
-    private func preparePreviewLayer(view: UIView) {
+    fileprivate func preparePreviewLayer(_ view: UIView) {
         let viewBounds = view.bounds
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.cameraSession)
-        previewLayer.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
-        previewLayer.position = CGPoint(x: CGRectGetMidX(viewBounds), y: CGRectGetMidY(viewBounds))
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspect
-        view.layer.insertSublayer(previewLayer, atIndex: 0)
+        previewLayer?.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
+        previewLayer?.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
+        view.layer.insertSublayer(previewLayer!, at: 0)
     }
 }
 

@@ -18,22 +18,22 @@ class TileProcessor: ImageProcessor {
         mColumns = columns
         mRows = rows
     }
-    override func process(imageSet: [UIImage]) -> UIImage {
+    override func process(_ imageSet: [UIImage]) -> UIImage {
         // TODO: Don't hard-code this
         let totalWidth = 720
         let totalHeight = 1280
-        let size = CGSizeMake(CGFloat(totalWidth), CGFloat(totalHeight))
+        let size = CGSize(width: CGFloat(totalWidth), height: CGFloat(totalHeight))
         UIGraphicsBeginImageContext(size)
-        for (index, img) in imageSet.enumerate() {
+        for (index, img) in imageSet.enumerated() {
             let imgWidth = totalWidth / mColumns
             let imgHeight = totalHeight / mRows
             let curColumn = (index % mColumns)
             let curRow = mColumns - 1 - index / mColumns
             
-            img.drawAtPoint(CGPoint(x: curColumn * imgWidth,y: curRow * imgHeight))
+            img.draw(at: CGPoint(x: curColumn * imgWidth,y: curRow * imgHeight))
         }
         let finalImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return finalImage
+        return finalImage!
     }
 }

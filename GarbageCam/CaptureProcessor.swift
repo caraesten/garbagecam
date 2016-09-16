@@ -16,16 +16,16 @@ import CoreImage
 class CaptureProcessor {
     let ciContext = CIContext(options: [kCIContextPriorityRequestLow: true])
     
-    func process(sampleBuffer: CMSampleBuffer, frameCount: Int) -> UIImage {
+    func process(_ sampleBuffer: CMSampleBuffer, frameCount: Int) -> UIImage {
         let buf = CMSampleBufferGetImageBuffer(sampleBuffer)!
-        CVPixelBufferLockBaseAddress(buf, 0)
+        CVPixelBufferLockBaseAddress(buf, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
         
-        let ciImg = CIImage(CVPixelBuffer: buf)
+        let ciImg = CIImage(cvPixelBuffer: buf)
         
-        let rotated = ciImg.imageByApplyingTransform(CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2))
-        let translated = rotated.imageByApplyingTransform(CGAffineTransformMakeTranslation(0, -rotated.extent.origin.y))
-        let cropped = translated.imageByCroppingToRect(
-            CGRect(
+        let rotated = ciImg.applying(CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2))
+        let translated = rotated.applying(CGAffineTransform(translationX: 0, y: -rotated.extent.origin.y))
+        let cropped = translated.cropping(
+            to: CGRect(
                 x: getCaptureOffsetX(frameCount, bufWidth: Int(rotated.extent.width), bufHeight: Int(rotated.extent.height)),
                 y: getCaptureOffsetY(frameCount, bufWidth: Int(rotated.extent.width), bufHeight: Int(rotated.extent.height)),
                 width: getCaptureWidth(Int(rotated.extent.width)),
@@ -33,34 +33,34 @@ class CaptureProcessor {
             )
         )
         
-        let cgImg = ciContext.createCGImage(cropped, fromRect: cropped.extent)
+        let cgImg = ciContext.createCGImage(cropped, from: cropped.extent)
 
-        let img = UIImage(CGImage: cgImg, scale:1, orientation:.Up)
+        let img = UIImage(cgImage: cgImg!, scale:1, orientation:.up)
         
-        CVPixelBufferUnlockBaseAddress(buf, 0)
+        CVPixelBufferUnlockBaseAddress(buf, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
         
         return img
     }
     
-    func getCaptureWidth(bufWidth: Int) -> Int {
+    func getCaptureWidth(_ bufWidth: Int) -> Int {
         return bufWidth
     }
     
-    func getCaptureHeight(bufHeight: Int) -> Int {
+    func getCaptureHeight(_ bufHeight: Int) -> Int {
         return bufHeight
     }
     
-    func getCaptureOffsetX(frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
+    func getCaptureOffsetX(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
         return 0
     }
     
-    func getCaptureOffsetY(frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
+    func getCaptureOffsetY(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
         return 0
     }
     
     // TODO: Add frame skip for more interesting grid capture
     
-    func isDone(frameCount: Int) -> Bool {
+    func isDone(_ frameCount: Int) -> Bool {
         // Goes until user stops UNLESS overriden
         return false
     }

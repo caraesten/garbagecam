@@ -12,15 +12,15 @@ import UIKit
 class ImageViewController: UIViewController {
     @IBOutlet var mImageView: UIImageView!
     
-    private var mImageTaken: UIImage?
+    fileprivate var mImageTaken: UIImage?
     
-    private var mImageSaver: ImageSaverDelegate?
+    fileprivate var mImageSaver: ImageSaverDelegate?
     
-    @IBAction func discardClicked(sender: UIButton) {
+    @IBAction func discardClicked(_ sender: UIButton) {
         self.mImageSaver?.onDismissed()
     }
     
-    @IBAction func saveClicked(sender: UIButton) {
+    @IBAction func saveClicked(_ sender: UIButton) {
         self.mImageSaver?.onSaved()
     }
     
@@ -31,11 +31,11 @@ class ImageViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    func setImage(image: UIImage, delegate: ImageSaverDelegate) {
+    func setImage(_ image: UIImage, delegate: ImageSaverDelegate) {
         mImageTaken = image
         mImageSaver = delegate
         if let view = mImageView {

@@ -18,7 +18,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     @IBOutlet var mRecordingButton: UIButton?
     
-    @IBAction func buttonClicked(sender: UIButton) {
+    @IBAction func buttonClicked(_ sender: UIButton) {
         if (mCameraController!.toggleRecording()) {
             setButtonRecordingOn()
         } else {
@@ -26,11 +26,11 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         }
     }
     
-    @IBAction func lockClicked(sender: UIButton) {
+    @IBAction func lockClicked(_ sender: UIButton) {
         if (mCameraController!.toggleExposureLock()) {
-            sender.tintColor = UIColor.blueColor()
+            sender.tintColor = UIColor.blue
         } else {
-            sender.tintColor = UIColor.whiteColor()
+            sender.tintColor = UIColor.white
         }
     }
     
@@ -41,14 +41,14 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             button.layer.removeAllAnimations()
             CATransaction.commit()
             button.alpha = 0.8
-            button.setImage(UIImage(named: "video"), forState: UIControlState.Normal)
+            button.setImage(UIImage(named: "video"), for: UIControlState())
         }
     }
     
     func setButtonRecordingOn() {
         if let button = mRecordingButton {
-            button.setImage(UIImage(named: "novideo"), forState: UIControlState.Normal)
-            UIView.animateWithDuration(1, delay: 0, options: [.Repeat, .Autoreverse, .BeginFromCurrentState, .AllowUserInteraction], animations: {() in
+            button.setImage(UIImage(named: "novideo"), for: UIControlState())
+            UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .beginFromCurrentState, .allowUserInteraction], animations: {() in
                 button.alpha = 0.5;
                 }, completion: nil)
         }
@@ -65,7 +65,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         mCameraController!.setupSession(self.view)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mCameraController!.startSession()
     }
@@ -83,9 +83,9 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     func showSaveDialog() {
         if let image = mCameraController!.processedImage {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let imageViewController = storyboard.instantiateViewControllerWithIdentifier("ImageViewController") as! ImageViewController
+            let imageViewController = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
             imageViewController.setImage(image, delegate: self)
-            presentViewController(imageViewController, animated: true, completion: nil)
+            present(imageViewController, animated: true, completion: nil)
             mSaveDialog = imageViewController
         }
     }
@@ -98,13 +98,13 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         }
     }
     
-    func photoSaved(photo: UIImage, didFinishSavingWithError: NSError?, contextInfo:UnsafePointer<Void>) {
+    func photoSaved(_ photo: UIImage, didFinishSavingWithError: NSError?, contextInfo:UnsafeRawPointer) {
         onDismissed()
     }
     
     func onDismissed() {
         resetRecorder()
-        mSaveDialog?.dismissViewControllerAnimated(true, completion: nil)
+        mSaveDialog?.dismiss(animated: true, completion: nil)
     }
     
     func resetRecorder() {
