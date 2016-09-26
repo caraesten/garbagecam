@@ -56,11 +56,11 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+        /*mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")*/
 
-        /* For grid capture
+        // For grid capture
         mCameraController = CameraController(processor: TileProcessor(columns: 40, rows: 40), captureProcessor: TileCaptureProcessor(columns: 40, rows: 40), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
-         */
+         //*/
         // Do any additional setup after loading the view, typically from a nib.
         mCameraController!.setupSession(self.view)
     }
@@ -85,7 +85,9 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let imageViewController = storyboard.instantiateViewController(withIdentifier: "ImageViewController") as! ImageViewController
             imageViewController.setImage(image, delegate: self)
-            present(imageViewController, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(imageViewController, animated: true, completion: nil)
+            }
             mSaveDialog = imageViewController
         }
     }
@@ -109,6 +111,10 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     func resetRecorder() {
         mCameraController!.clearData()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
 
