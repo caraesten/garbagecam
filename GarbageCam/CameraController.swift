@@ -204,7 +204,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.cameraSession)
         previewLayer?.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
         previewLayer?.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.insertSublayer(previewLayer!, at: 0)
     }
 }

@@ -19,45 +19,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-Hf-wP9">
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveClicked:" destination="Uq2-SE-wCp" eventType="touchUpInside" id="mTm-TD-hQ0"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-dM-RFh">
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Discard">
-                                    <color key="titleColor" red="0.82156004579999997" green="0.0" blue="0.016869056859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="discardClicked:" destination="Uq2-SE-wCp" eventType="touchUpInside" id="KVm-g0-4bc"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hW8-um-p8c"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hW8-um-p8c">
+                                <frame key="frameInset" width="383" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3c-uS-p4g">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXK-dM-RFh">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="69" id="CnE-tJ-XnJ"/>
+                                            <constraint firstAttribute="height" constant="36" id="qaL-RO-Zci"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Discard">
+                                            <color key="titleColor" red="0.82156004579999997" green="0.0" blue="0.016869056859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="discardClicked:" destination="Uq2-SE-wCp" eventType="touchUpInside" id="KVm-g0-4bc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HUU-Hf-wP9">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="SXq-nh-AHd"/>
+                                            <constraint firstAttribute="width" constant="44" id="gQi-kx-Uvv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveClicked:" destination="Uq2-SE-wCp" eventType="touchUpInside" id="mTm-TD-hQ0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="HUU-Hf-wP9" firstAttribute="centerY" secondItem="v3c-uS-p4g" secondAttribute="centerY" id="26m-Ee-6Yy"/>
+                                    <constraint firstAttribute="height" constant="70" id="7Zr-6d-f4S"/>
+                                    <constraint firstItem="HUU-Hf-wP9" firstAttribute="leading" secondItem="v3c-uS-p4g" secondAttribute="leading" constant="8" id="TqA-Ou-0pv"/>
+                                    <constraint firstAttribute="trailing" secondItem="rXK-dM-RFh" secondAttribute="trailing" constant="8" id="d9s-Ca-jfw"/>
+                                    <constraint firstItem="rXK-dM-RFh" firstAttribute="centerY" secondItem="v3c-uS-p4g" secondAttribute="centerY" id="lWk-WQ-pD2"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rXK-dM-RFh" firstAttribute="top" secondItem="hW8-um-p8c" secondAttribute="bottom" constant="8" id="7l4-Bt-wYn"/>
-                            <constraint firstItem="UsX-4p-jiu" firstAttribute="top" secondItem="rXK-dM-RFh" secondAttribute="bottom" constant="20" id="C2e-pA-20J"/>
-                            <constraint firstItem="rXK-dM-RFh" firstAttribute="trailing" secondItem="YX4-WV-S73" secondAttribute="trailingMargin" id="QhG-yE-rdA"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hW8-um-p8c" secondAttribute="trailing" constant="-20" id="TYF-gX-ZMo"/>
-                            <constraint firstItem="rXK-dM-RFh" firstAttribute="trailing" secondItem="YX4-WV-S73" secondAttribute="trailingMargin" id="Us3-QX-e9L"/>
-                            <constraint firstItem="HUU-Hf-wP9" firstAttribute="leading" secondItem="YX4-WV-S73" secondAttribute="leadingMargin" constant="9" id="Wno-Dv-ESz"/>
-                            <constraint firstItem="UsX-4p-jiu" firstAttribute="top" secondItem="HUU-Hf-wP9" secondAttribute="bottom" constant="20" id="b1b-Ib-p5G"/>
-                            <constraint firstItem="rXK-dM-RFh" firstAttribute="top" secondItem="hW8-um-p8c" secondAttribute="bottom" constant="20" id="n8W-FC-vJg"/>
-                            <constraint firstItem="hW8-um-p8c" firstAttribute="leading" secondItem="YX4-WV-S73" secondAttribute="leadingMargin" constant="-20" id="qti-QV-8vT"/>
-                            <constraint firstItem="hW8-um-p8c" firstAttribute="top" secondItem="YX4-WV-S73" secondAttribute="topMargin" id="t9u-oE-pYk"/>
+                            <constraint firstItem="UsX-4p-jiu" firstAttribute="top" secondItem="v3c-uS-p4g" secondAttribute="bottom" id="5Xa-zh-WCg"/>
+                            <constraint firstItem="UsX-4p-jiu" firstAttribute="top" secondItem="v3c-uS-p4g" secondAttribute="bottom" id="FFb-J7-bpL"/>
+                            <constraint firstItem="v3c-uS-p4g" firstAttribute="leading" secondItem="YX4-WV-S73" secondAttribute="leading" id="nKe-Ce-VA1"/>
+                            <constraint firstAttribute="trailing" secondItem="v3c-uS-p4g" secondAttribute="trailing" id="tGX-Iq-uG4"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7l4-Bt-wYn"/>
-                                <exclude reference="QhG-yE-rdA"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="mImageView" destination="hW8-um-p8c" id="fGf-fB-hXb"/>
@@ -65,7 +76,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVf-Zo-988" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189" y="-501"/>
+            <point key="canvasLocation" x="188" y="-501.49925037481262"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="tne-QT-ifu">
