@@ -10,12 +10,16 @@ import Foundation
 import GameKit
 
 struct TileCam: GarbageCamera {
+    static let ID = 0
+    static let TITLE = "ChunkyPixel"
     private let mRows: Int
     private let mColumns: Int
     
     var captureProcessor: CaptureProcessor
     var imageProcessor: ImageProcessor
     var settings: CameraSettings
+    var id: Int
+    var title: String
     
     init(columns: Int, rows: Int, randomCapture: Bool) {
         mRows = rows
@@ -30,6 +34,8 @@ struct TileCam: GarbageCamera {
         captureProcessor = TileCaptureProcessor(columns: mColumns, rows: mRows, mappings: frameMappings)
         imageProcessor = TileProcessor(columns: mColumns, rows: mRows, mappings: frameMappings)
         settings = TileCamSettings()
+        id = TileCam.ID
+        title = TileCam.TITLE
     }
     
 }

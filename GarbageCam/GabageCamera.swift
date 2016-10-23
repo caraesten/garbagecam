@@ -12,6 +12,8 @@ protocol GarbageCamera {
     var captureProcessor: CaptureProcessor {get}
     var imageProcessor: ImageProcessor {get}
     var settings: CameraSettings {get}
+    var id: Int {get}
+    var title: String {get}
 }
 
 class NoneCamera: GarbageCamera {
@@ -21,4 +23,6 @@ class NoneCamera: GarbageCamera {
     var captureProcessor: CaptureProcessor = CaptureProcessor()
     var imageProcessor: ImageProcessor = ImageProcessor()
     var settings: CameraSettings = CameraSettings()
+    var id = -1
+    var title = ""
 }

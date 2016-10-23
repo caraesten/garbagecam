@@ -18,8 +18,33 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     var mSettingsDialog: CaptureSettingsViewController?
     
+    var mCurrentCameraId: Int?
+    
     @IBOutlet var mRecordingButton: UIButton?
     
+    @IBAction func onModeTouch(_ sender: UIButton) {
+        DispatchQueue.global(qos: .default).async {
+            self.mCameraController?.tearDownPreview(self.view)
+            self.mCameraController?.stopSession()
+            
+            // TODO: persist settings per camera
+            let camera: GarbageCamera
+            if (self.mCurrentCameraId == TileCam.ID) {
+                camera = StripCam()
+            } else {
+                camera = TileCam(columns: 40, rows: 40, randomCapture: false)
+            }
+            self.mCurrentCameraId = camera.id
+            sender.setNeedsLayout()
+            
+            self.mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+            DispatchQueue.main.async {
+                sender.titleLabel?.text = camera.title
+                self.mCameraController!.setupSession(self.view)
+                self.mCameraController!.startSession()
+            }
+        }
+    }
     @IBAction func buttonClicked(_ sender: UIButton) {
         if (mCameraController!.toggleRecording()) {
             setButtonRecordingOn()
@@ -70,10 +95,12 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         super.viewDidLoad()
         /*mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")*/
 
+        let camera = TileCam(columns: 40, rows: 40, randomCapture: false)
         // For grid capture
-        mCameraController = CameraController(camera: TileCam(columns: 40, rows: 40, randomCapture: false), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+        mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
          //*/
         // Do any additional setup after loading the view, typically from a nib.
+        mCurrentCameraId = camera.id
         mCameraController!.setupSession(self.view)
     }
     
