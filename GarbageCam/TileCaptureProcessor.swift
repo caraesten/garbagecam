@@ -7,14 +7,19 @@
 //
 
 import Foundation
+import GameKit
 
 class TileCaptureProcessor: CaptureProcessor {
     let mRows: Int
     let mColumns: Int
     
-    init(columns: Int, rows: Int) {
+    // Allows for random frame capture: each element in the array corrsponds to a frame. Index = index in non-random orders.
+    let mFrameMappings: [Int]
+    
+    init(columns: Int, rows: Int, mappings: [Int]) {
         mRows = rows
         mColumns = columns
+        mFrameMappings = mappings
     }
     
     override func getCaptureHeight(_ bufHeight: Int) -> Int {
@@ -26,13 +31,15 @@ class TileCaptureProcessor: CaptureProcessor {
     }
     
     override func getCaptureOffsetX(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
+        let mappedNumber = mFrameMappings[frameNumber]
         let imgWidth = getCaptureWidth(bufWidth)
-        return imgWidth * frameNumber % bufWidth
+        return imgWidth * mappedNumber % bufWidth
     }
     
     override func getCaptureOffsetY(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
+        let mappedNumber = mFrameMappings[frameNumber]
         let imgHeight = getCaptureHeight(bufHeight)
-        let curRow = frameNumber / mColumns
+        let curRow = mappedNumber / mColumns
         return min(curRow * imgHeight, bufHeight - imgHeight)
     }
     

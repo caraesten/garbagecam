@@ -13,10 +13,12 @@ import CoreGraphics
 class TileProcessor: ImageProcessor {
     let mColumns: Int
     let mRows: Int
+    let mFrameMappings: [Int]
     
-    init(columns: Int, rows: Int) {
+    init(columns: Int, rows: Int, mappings: [Int]) {
         mColumns = columns
         mRows = rows
+        mFrameMappings = mappings
     }
     override func process(_ imageSet: [UIImage]) -> UIImage {
         // TODO: Don't hard-code this
@@ -25,10 +27,11 @@ class TileProcessor: ImageProcessor {
         let size = CGSize(width: CGFloat(totalWidth), height: CGFloat(totalHeight))
         UIGraphicsBeginImageContext(size)
         for (index, img) in imageSet.enumerated() {
+            let mappedIndex = mFrameMappings[index]
             let imgWidth = totalWidth / mColumns
             let imgHeight = totalHeight / mRows
-            let curColumn = (index % mColumns)
-            let curRow = mColumns - 1 - index / mColumns
+            let curColumn = (mappedIndex % mColumns)
+            let curRow = mColumns - 1 - mappedIndex / mColumns
             
             img.draw(at: CGPoint(x: curColumn * imgWidth,y: curRow * imgHeight))
         }

@@ -29,6 +29,8 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
+    let currentCamera: GarbageCamera
+    
     fileprivate let mQueue: DispatchQueue
     fileprivate let mQueueName: String
     fileprivate let mProcessor: ImageProcessor
@@ -40,6 +42,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate var mCurrentData:[UIImage] = [UIImage]()
     fileprivate var mFinalImage:UIImage?
     fileprivate var mCaptureDevice: AVCaptureDevice?
+    fileprivate var mPreviewLayer: CALayer?
     
     fileprivate lazy var cameraSession: AVCaptureSession = {
         let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
@@ -47,16 +50,17 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return s
     }()
     
-    init(processor: ImageProcessor, captureProcessor: CaptureProcessor, delegate: CameraEventDelegate, queueName: String?) {
+    init(camera: GarbageCamera, delegate: CameraEventDelegate, queueName: String?) {
         if let qn = queueName {
             mQueueName = qn
         } else {
             mQueueName = CameraController.DEFAULT_QUEUE_NAME
         }
         mQueue = DispatchQueue(label: mQueueName, attributes: [])
-        mProcessor = processor
-        mCaptureProcessor = captureProcessor
+        mProcessor = camera.imageProcessor
+        mCaptureProcessor = camera.captureProcessor
         mDelegate = delegate
+        currentCamera = camera
     }
     
     func startSession() {
@@ -71,21 +75,43 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return mProcessor.process(mCurrentData)
     }
     
+    func tearDownPreview(_ view: UIView) {
+        if let oldLayer = mPreviewLayer {
+            oldLayer.removeFromSuperlayer()
+        }
+    }
+    
     func setupSession(_ view: UIView) {
-        preparePreviewLayer(view)
-        
-        mCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        if mCaptureDevice == nil {
+            mCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        }
         do {
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionRuntimeError, object: nil, queue: nil, using: {
+                (errorNotif: Notification!) -> Void in
+                NSLog("NOTIF:%@", errorNotif.description)
+                })
             let input = try AVCaptureDeviceInput(device: mCaptureDevice)
             cameraSession.beginConfiguration()
+            try mCaptureDevice?.lockForConfiguration()
             
+            if let inputs = cameraSession.inputs as? [AVCaptureDeviceInput] {
+                if (inputs.count > 0) {
+                    cameraSession.removeInput(inputs[0])
+                }
+            }
             if (cameraSession.canAddInput(input)) {
                 cameraSession.addInput(input)
             }
+            
             let dataOut = AVCaptureVideoDataOutput()
             dataOut.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA as UInt32)]
             dataOut.alwaysDiscardsLateVideoFrames = false
             
+            if let outputs = cameraSession.outputs as? [AVCaptureOutput] {
+                if (outputs.count > 0) {
+                    cameraSession.removeOutput(outputs[0])
+                }
+            }
             if (cameraSession.canAddOutput(dataOut)) {
                 cameraSession.addOutput(dataOut)
             }
@@ -114,13 +140,16 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 }
             }
             
+            try mCaptureDevice?.unlockForConfiguration()
             cameraSession.commitConfiguration()
             
             dataOut.setSampleBufferDelegate(self, queue: mQueue)
             
+            
         } catch let error as NSError {
             NSLog("ERROR: %@", error.localizedDescription)
         }
+        preparePreviewLayer(view)
     }
     
     // Returns new state
@@ -201,11 +230,17 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     fileprivate func preparePreviewLayer(_ view: UIView) {
         let viewBounds = view.bounds
+        if let oldLayer = mPreviewLayer {
+            oldLayer.removeFromSuperlayer()
+        }
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.cameraSession)
         previewLayer?.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
         previewLayer?.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.insertSublayer(previewLayer!, at: 0)
+        if let preview = previewLayer {
+            mPreviewLayer = preview
+        }
     }
 }
 

@@ -11,10 +11,12 @@ import AVFoundation
 import CoreVideo
 import CoreGraphics
 
-class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate {
+class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate, CaptureSettingsDelegate {
     var mCameraController: CameraController?
         
     var mSaveDialog: ImageViewController?
+    
+    var mSettingsDialog: CaptureSettingsViewController?
     
     @IBOutlet var mRecordingButton: UIButton?
     
@@ -32,6 +34,16 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         } else {
             sender.tintColor = UIColor.white
         }
+    }
+    
+    @IBAction func settingsClicked(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CaptureSettingsViewController") as! CaptureSettingsViewController
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.delegate = self
+        vc.settings = mCameraController?.currentCamera.settings
+        mSettingsDialog = vc
+        present(vc, animated: true, completion: nil)
     }
     
     func setButtonRecordingOff() {
@@ -59,7 +71,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         /*mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")*/
 
         // For grid capture
-        mCameraController = CameraController(processor: TileProcessor(columns: 40, rows: 40), captureProcessor: TileCaptureProcessor(columns: 40, rows: 40), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+        mCameraController = CameraController(camera: TileCam(columns: 40, rows: 40, randomCapture: false), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
          //*/
         // Do any additional setup after loading the view, typically from a nib.
         mCameraController!.setupSession(self.view)
@@ -107,6 +119,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     func onDismissed() {
         resetRecorder()
         mSaveDialog?.dismiss(animated: true, completion: nil)
+        mSaveDialog = nil
     }
     
     func resetRecorder() {
@@ -115,6 +128,24 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func restartCamera(settingsManager: CameraSettings, settings: [CameraSettings.SettingId: CameraSettings.OptionId]) {
+        DispatchQueue.global(qos: .default).async {
+            self.mCameraController?.tearDownPreview(self.view)
+            self.mCameraController?.stopSession()
+            self.mCameraController = CameraController(camera: settingsManager.makeCamera(settings: settings), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+            DispatchQueue.main.async {
+                self.mCameraController!.setupSession(self.view)
+                self.mCameraController!.startSession()
+            }
+        }
+    }
+    
+    func onSettingsFinished(settingsManager: CameraSettings, settings: [CameraSettings.SettingId: CameraSettings.OptionId]) {
+        restartCamera(settingsManager: settingsManager, settings: settings)
+        mSettingsDialog?.dismiss(animated: true, completion: nil)
+        mSettingsDialog = nil
     }
 }
 
