@@ -160,7 +160,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             } else {
                 curMax = 0
             }
-            try mCaptureDevice?.unlockForConfiguration()
+            mCaptureDevice?.unlockForConfiguration()
             cameraSession.sessionPreset = AVCaptureSessionPresetHigh
             cameraSession.commitConfiguration()
 

@@ -22,7 +22,7 @@ class CaptureProcessor {
         
         let ciImg = CIImage(cvPixelBuffer: buf)
         
-        let rotated = ciImg.applying(CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2))
+        let rotated = ciImg.applying(CGAffineTransform(rotationAngle: -CGFloat(Double.pi) / 2))
         let translated = rotated.applying(CGAffineTransform(translationX: 0, y: -rotated.extent.origin.y))
         let cropped = translated.cropping(
             to: CGRect(
