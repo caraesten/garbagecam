@@ -21,7 +21,7 @@ class TileCamSettings: CameraSettings {
     ]
     
     private let defaults = [
-        "chunk_size": "small",
+        "chunk_size": "medium",
         "sampling_order": "sequential"
     ]
     
@@ -42,9 +42,7 @@ class TileCamSettings: CameraSettings {
             return nil
         }
     }
-    override func getDefaultSettings() -> [CameraSettings.SettingId : CameraSettings.OptionId] {
-        return defaults
-    }
+    
     override func makeCamera(settings: [CameraSettings.SettingId : CameraSettings.OptionId]) -> GarbageCamera {
         let columns: Int
         let rows: Int

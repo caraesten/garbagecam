@@ -11,6 +11,7 @@ import UIKit
 import AVFoundation
 import CoreVideo
 import CoreGraphics
+import Crashlytics
 
 class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     static let DEFAULT_QUEUE_NAME = "com.estenh.GarbageCameraQueue"
@@ -50,6 +51,14 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return s
     }()
     
+    class func make(camera: GarbageCamera, delegate: CameraEventDelegate, controller: CameraController?, queueName: String?) -> CameraController {
+        let cameraController = CameraController(camera: camera, delegate: delegate, queueName: queueName)
+        if let camCtrl = controller {
+            cameraController.mCaptureDevice = camCtrl.mCaptureDevice
+        }
+        return cameraController
+    }
+    
     init(camera: GarbageCamera, delegate: CameraEventDelegate, queueName: String?) {
         if let qn = queueName {
             mQueueName = qn
@@ -81,14 +90,40 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
     
+    func switchCamera() {
+        cameraSession.beginConfiguration()
+        cameraSession.sessionPreset = AVCaptureSessionPresetHigh
+        if let input = cameraSession.inputs[0] as? AVCaptureDeviceInput {
+            cameraSession.removeInput(input)
+            if let newCam = getCameraForPosition(position: input.device.position == .back ? .front : .back) {
+                do {
+                    let maxFps = configureForMaxFps(device: newCam)
+                    let newInput:AVCaptureDeviceInput = try AVCaptureDeviceInput(device: newCam)
+                    mCaptureDevice = newCam
+                    cameraSession.addInput(newInput)
+                    cameraSession.commitConfiguration()
+                    mDelegate.onCameraPrepared(fps: Float(maxFps))
+                } catch let e as NSError {
+                    Crashlytics.sharedInstance().recordError(e)
+                }
+            }
+        }
+    }
+    
+    func getCameraForPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice? {
+        return (AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as! [AVCaptureDevice]).first(where: {$0.position == position})
+    }
+    
     func setupSession(_ view: UIView) {
+        let maxFps: Float
         if mCaptureDevice == nil {
             mCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         }
         do {
             NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionRuntimeError, object: nil, queue: nil, using: {
                 (errorNotif: Notification!) -> Void in
-                NSLog("NOTIF:%@", errorNotif.description)
+                // TODO: Ideally this would accurately record stack frame
+                Crashlytics.sharedInstance().recordCustomExceptionName("SessionError", reason: errorNotif.description, frameArray: [CLSStackFrame()])
                 })
             let input = try AVCaptureDeviceInput(device: mCaptureDevice)
             cameraSession.beginConfiguration()
@@ -119,37 +154,48 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             // TODO: Add selection of mode (> resolution than 720p for grid capture would be nice, 4k would be incredible)
             
             // MAX POWER
-            var curMax = 0.0
-            if let device = mCaptureDevice {
-                for format in device.formats {
-                    let ranges = (format as AnyObject).videoSupportedFrameRateRanges as! [AVFrameRateRange]
-                    let rates = ranges[0]
-                    
-                    if (rates.maxFrameRate > curMax) {
-                        do {
-                            try device.lockForConfiguration()
-                            device.activeFormat = format as! AVCaptureDeviceFormat
-                            device.activeVideoMinFrameDuration = rates.minFrameDuration
-                            device.activeVideoMaxFrameDuration = rates.maxFrameDuration
-                            device.unlockForConfiguration()
-                        } catch let error as NSError {
-                            NSLog("Issue w/ frame rates: %@", error.localizedDescription)
-                        }
-                        curMax = rates.maxFrameRate
-                    }
-                }
+            let curMax: Double
+            if let captureDevice = mCaptureDevice {
+                 curMax = configureForMaxFps(device: captureDevice)
+            } else {
+                curMax = 0
             }
-            
             try mCaptureDevice?.unlockForConfiguration()
+            cameraSession.sessionPreset = AVCaptureSessionPresetHigh
             cameraSession.commitConfiguration()
-            
+
             dataOut.setSampleBufferDelegate(self, queue: mQueue)
-            
+            maxFps = Float(curMax)
             
         } catch let error as NSError {
-            NSLog("ERROR: %@", error.localizedDescription)
+            maxFps = 0
+            Crashlytics.sharedInstance().recordError(error)
         }
         preparePreviewLayer(view)
+        mDelegate.onCameraPrepared(fps: maxFps)
+    }
+    
+    // Returns the configured max FPS
+    func configureForMaxFps(device: AVCaptureDevice) -> Double {
+        var curMax = 0.0
+        for format in device.formats {
+            let ranges = (format as AnyObject).videoSupportedFrameRateRanges as! [AVFrameRateRange]
+            let rates = ranges[0]
+            
+            if (rates.maxFrameRate > curMax) {
+                do {
+                    try device.lockForConfiguration()
+                    device.activeFormat = format as! AVCaptureDeviceFormat
+                    device.activeVideoMinFrameDuration = rates.minFrameDuration
+                    device.activeVideoMaxFrameDuration = rates.maxFrameDuration
+                    device.unlockForConfiguration()
+                } catch let error as NSError {
+                    Crashlytics.sharedInstance().recordError(error)
+                }
+                curMax = rates.maxFrameRate
+            }
+        }
+        return curMax
     }
     
     // Returns new state
@@ -157,22 +203,26 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         if (!mIsRecording) {
             if let device = mCaptureDevice {
                 do {
-                    try device.lockForConfiguration()
-                    device.focusMode = AVCaptureFocusMode.locked
-                    device.unlockForConfiguration()
-                } catch let e as NSError {
-                    NSLog("Couldn't configure focus: %@", e.localizedDescription)
+                    if device.isFocusModeSupported(.locked) {
+                        try device.lockForConfiguration()
+                        device.focusMode = AVCaptureFocusMode.locked
+                        device.unlockForConfiguration()
+                    }
+                } catch let error as NSError {
+                    Crashlytics.sharedInstance().recordError(error)
                 }
             }
             mIsRecording = true
         } else {
             if let device = mCaptureDevice {
                 do {
-                    try device.lockForConfiguration()
-                    device.focusMode = AVCaptureFocusMode.autoFocus
-                    device.unlockForConfiguration()
-                } catch let e as NSError {
-                    NSLog("Couldn't configure focus: %@", e.localizedDescription)
+                    if device.isFocusModeSupported(.autoFocus) {
+                        try device.lockForConfiguration()
+                        device.focusMode = AVCaptureFocusMode.autoFocus
+                        device.unlockForConfiguration()
+                    }
+                } catch let error as NSError {
+                    Crashlytics.sharedInstance().recordError(error)
                 }
             }
             mIsRecording = false
@@ -188,7 +238,15 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func finishRecording() {
         mIsRecording = false
-        mDelegate.onRecordingFinished()
+        // Post this to the main thread; this method is usually called from a dispatch queue,
+        // no reason for clients to have to worry about that.
+        DispatchQueue.main.async {
+            self.mDelegate.onRecordingFinished()
+        }
+    }
+    
+    func isRecording() -> Bool {
+        return mIsRecording
     }
     
     // Returns new state
@@ -206,8 +264,8 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 }
                 device.unlockForConfiguration()
                 return newState
-            } catch let e as NSError {
-                NSLog("Couldn't lock exposure: %@", e.localizedDescription)
+            } catch let error as NSError {
+                Crashlytics.sharedInstance().recordError(error)
             }
         }
         return false
@@ -219,7 +277,15 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     }
     
     @objc func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        let progress = mCaptureProcessor.getProgress(mCurrentData.count)
         let isDone =  mCaptureProcessor.isDone(mCurrentData.count)
+        
+        if (progress > 0 && !isDone) {
+            DispatchQueue.main.async {
+                self.mDelegate.onRecordingProgress(percent: progress)
+            }
+        }
+        
         if (mIsRecording && isDone) {
             finishRecording()
         } else if (mIsRecording) {
@@ -245,5 +311,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 protocol CameraEventDelegate {
+    func onRecordingProgress(percent: Float)
     func onRecordingFinished()
+    func onCameraPrepared(fps: Float)
 }

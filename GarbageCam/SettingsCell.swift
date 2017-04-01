@@ -14,9 +14,7 @@ class SettingsCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
     fileprivate var mOptions: [(CameraSettings.OptionId, String)] = []
     fileprivate var mDelegate: SettingsUpdatedDelegate?
     fileprivate var mSettingId: String = ""
-    
-    public private(set) var selectedOption: String = ""
-    
+
     @IBOutlet public var propertyLabel: UILabel!
     
     @IBOutlet public var propertyPicker: UIPickerView!
@@ -33,6 +31,21 @@ class SettingsCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
         return 1
     }
     
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        let label: UILabel
+        let pickerLabel = view as? UILabel
+        if let aLabel = pickerLabel {
+            label = aLabel
+        } else {
+            label = UILabel()
+        }
+        label.font = UIFont(name: "Nexa Light", size: 16)
+        label.text = mOptions[row].1
+        label.textAlignment = .right
+        label.textColor = .white
+        return label
+    }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return mOptions.count
     }
@@ -42,12 +55,10 @@ class SettingsCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedOption = mOptions[row].0
-        // TODO: selectedOption is useless now
         mDelegate?.updatedSetting(settingId: mSettingId, optionId: mOptions[row].0)
     }
     
-    func initializeCell(title: String, settingId: CameraSettings.SettingId, options: [(CameraSettings.OptionId, String)], delegate: SettingsUpdatedDelegate) {
+    func initializeCell(title: String, settingId: CameraSettings.SettingId, options: [(CameraSettings.OptionId, String)], defaultOption: CameraSettings.OptionId, delegate: SettingsUpdatedDelegate) {
         mTitle = title
         mOptions = options
         mSettingId = settingId
@@ -55,6 +66,13 @@ class SettingsCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
         propertyPicker.dataSource = self
         propertyPicker.delegate = self
         mDelegate = delegate
+        var row = 0
+        for (index, option) in options.enumerated() {
+            if (option.0 == defaultOption) {
+                row = index
+            }
+        }
+        propertyPicker.selectRow(row, inComponent: 0, animated: false)
     }
 }
 

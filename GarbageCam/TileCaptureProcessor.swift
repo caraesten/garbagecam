@@ -46,4 +46,8 @@ class TileCaptureProcessor: CaptureProcessor {
     override func isDone(_ frameCount: Int) -> Bool {
         return frameCount >= mColumns * mRows
     }
+    
+    override func getProgress(_ frameCount: Int) -> Float {
+        return Float(frameCount) / Float(mColumns * mRows)
+    }
 }

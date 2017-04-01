@@ -11,7 +11,7 @@ import GameKit
 
 struct TileCam: GarbageCamera {
     static let ID = 0
-    static let TITLE = "ChunkyPixel"
+    static let TITLE = "Pixel Grid"
     private let mRows: Int
     private let mColumns: Int
     

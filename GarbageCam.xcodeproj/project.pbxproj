@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F69BB4D1AF401E01087B43E /* Pods_GarbageCam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB9731F02E036D859C70036 /* Pods_GarbageCam.framework */; };
+		D60DFA711E80A201007EA7D1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60DFA701E80A201007EA7D1 /* AboutViewController.swift */; };
 		D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */; };
 		D60FEB891D69A99C00E3D7F2 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */; };
 		D60FEB8C1D69A99C00E3D7F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */; };
@@ -26,15 +28,26 @@
 		D66D3C761DA66BE700A2D668 /* TileCam.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66D3C751DA66BE700A2D668 /* TileCam.swift */; };
 		D66D3C781DA66C1700A2D668 /* GabageCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66D3C771DA66C1700A2D668 /* GabageCamera.swift */; };
 		D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D690B24A1D6A12A000F0760D /* ImageViewController.swift */; };
+		D69663D21E843FD50080955F /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69663D11E843FD50080955F /* AppSettings.swift */; };
 		D69733C91D8042A30035F833 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733C81D8042A30035F833 /* CameraController.swift */; };
 		D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CA1D8048EB0035F833 /* ImageProcessor.swift */; };
 		D69733CD1D8049420035F833 /* StripProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D69733CC1D8049420035F833 /* StripProcessor.swift */; };
+		D6999E761E3950B10023269D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6999E741E3950B10023269D /* Fabric.framework */; };
+		D6999E771E3950B10023269D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6999E751E3950B10023269D /* Crashlytics.framework */; };
+		D6999E7C1E395F200023269D /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6999E7A1E395F200023269D /* HockeySDK.framework */; };
+		D6999E7D1E395F200023269D /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D6999E7B1E395F200023269D /* HockeySDKResources.bundle */; };
+		D6AE822F1E7B171300EA6DE4 /* DoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6AE822E1E7B171300EA6DE4 /* DoneCell.swift */; };
 		D6E9BFEF1D80615600A4029B /* CaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */; };
 		D6E9BFF11D80639400A4029B /* StripCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */; };
 		D6E9BFF31D809C5100A4029B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D6E9BFF21D809C5100A4029B /* README.md */; };
+		D6F231D61E79F10500D545E4 /* Nexa Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = D6F231D51E79F10500D545E4 /* Nexa Light.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28301172C489351E59ECAEEB /* Pods-GarbageCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarbageCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam.release.xcconfig"; sourceTree = "<group>"; };
+		2AB9731F02E036D859C70036 /* Pods_GarbageCam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GarbageCam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC31C8A865BF1308D340D163 /* Pods-GarbageCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarbageCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam.debug.xcconfig"; sourceTree = "<group>"; };
+		D60DFA701E80A201007EA7D1 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = ../AboutViewController.swift; sourceTree = "<group>"; };
 		D60FEB831D69A99900E3D7F2 /* GarbageCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GarbageCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -56,12 +69,19 @@
 		D66D3C751DA66BE700A2D668 /* TileCam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCam.swift; sourceTree = "<group>"; };
 		D66D3C771DA66C1700A2D668 /* GabageCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GabageCamera.swift; sourceTree = "<group>"; };
 		D690B24A1D6A12A000F0760D /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		D69663D11E843FD50080955F /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		D69733C81D8042A30035F833 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		D69733CA1D8048EB0035F833 /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		D69733CC1D8049420035F833 /* StripProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripProcessor.swift; sourceTree = "<group>"; };
+		D6999E741E3950B10023269D /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		D6999E751E3950B10023269D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		D6999E7A1E395F200023269D /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
+		D6999E7B1E395F200023269D /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
+		D6AE822E1E7B171300EA6DE4 /* DoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneCell.swift; sourceTree = "<group>"; };
 		D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureProcessor.swift; sourceTree = "<group>"; };
 		D6E9BFF01D80639400A4029B /* StripCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StripCaptureProcessor.swift; sourceTree = "<group>"; };
 		D6E9BFF21D809C5100A4029B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D6F231D51E79F10500D545E4 /* Nexa Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nexa Light.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,22 +90,48 @@
 			buildActionMask = 2147483647;
 			files = (
 				D659CAA21D69CE6500509DE4 /* CoreGraphics.framework in Frameworks */,
+				D6999E771E3950B10023269D /* Crashlytics.framework in Frameworks */,
+				D6999E7C1E395F200023269D /* HockeySDK.framework in Frameworks */,
 				D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */,
 				D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */,
+				D6999E761E3950B10023269D /* Fabric.framework in Frameworks */,
+				8F69BB4D1AF401E01087B43E /* Pods_GarbageCam.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		891BEEE625292FBBE7771525 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2AB9731F02E036D859C70036 /* Pods_GarbageCam.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BED1447413E66210ABB077FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC31C8A865BF1308D340D163 /* Pods-GarbageCam.debug.xcconfig */,
+				28301172C489351E59ECAEEB /* Pods-GarbageCam.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D60FEB7A1D69A99900E3D7F2 = {
 			isa = PBXGroup;
 			children = (
+				D6999E791E395F200023269D /* HockeySDK.embeddedframework */,
+				D6999E741E3950B10023269D /* Fabric.framework */,
+				D6999E751E3950B10023269D /* Crashlytics.framework */,
 				D659CAA11D69CE6500509DE4 /* CoreGraphics.framework */,
 				D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */,
 				D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */,
 				D60FEB851D69A99C00E3D7F2 /* GarbageCam */,
 				D60FEB841D69A99900E3D7F2 /* Products */,
+				BED1447413E66210ABB077FD /* Pods */,
+				891BEEE625292FBBE7771525 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,10 +150,12 @@
 				D619A7341D8BD1A0004F498A /* StripCam */,
 				D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */,
 				D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */,
+				D60DFA701E80A201007EA7D1 /* AboutViewController.swift */,
 				D62B24791D9AAF2100D73FA0 /* CaptureSettingsViewController.swift */,
 				D690B24A1D6A12A000F0760D /* ImageViewController.swift */,
 				D60FEB8A1D69A99C00E3D7F2 /* Main.storyboard */,
 				D60FEB8D1D69A99C00E3D7F2 /* Assets.xcassets */,
+				D6F231D51E79F10500D545E4 /* Nexa Light.otf */,
 				D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */,
 				D60FEB921D69A99C00E3D7F2 /* Info.plist */,
 				D69733C81D8042A30035F833 /* CameraController.swift */,
@@ -115,8 +163,10 @@
 				D6E9BFEE1D80615600A4029B /* CaptureProcessor.swift */,
 				D6E9BFF21D809C5100A4029B /* README.md */,
 				D62B247B1D9AB17D00D73FA0 /* SettingsCell.swift */,
+				D6AE822E1E7B171300EA6DE4 /* DoneCell.swift */,
 				D62B247F1D9AD1C700D73FA0 /* CameraSettings.swift */,
 				D66D3C771DA66C1700A2D668 /* GabageCamera.swift */,
+				D69663D11E843FD50080955F /* AppSettings.swift */,
 			);
 			path = GarbageCam;
 			sourceTree = "<group>";
@@ -143,6 +193,16 @@
 			name = TileCam;
 			sourceTree = "<group>";
 		};
+		D6999E791E395F200023269D /* HockeySDK.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				D6999E7A1E395F200023269D /* HockeySDK.framework */,
+				D6999E7B1E395F200023269D /* HockeySDKResources.bundle */,
+			);
+			name = HockeySDK.embeddedframework;
+			path = "HockeySDK-iOS/HockeySDK.embeddedframework";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +210,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D60FEB951D69A99C00E3D7F2 /* Build configuration list for PBXNativeTarget "GarbageCam" */;
 			buildPhases = (
+				E15F7CA21C76748D92B120FB /* [CP] Check Pods Manifest.lock */,
 				D60FEB7F1D69A99900E3D7F2 /* Sources */,
 				D60FEB801D69A99900E3D7F2 /* Frameworks */,
 				D60FEB811D69A99900E3D7F2 /* Resources */,
+				D6999E731E3950900023269D /* ShellScript */,
+				D6999E781E395F0A0023269D /* Run Script */,
+				7711D2B7A39BBB8DD9D4CF9D /* [CP] Embed Pods Frameworks */,
+				0E409725EA6E2CB0B62D625D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -175,8 +240,9 @@
 				TargetAttributes = {
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = HES75F3C63;
+						DevelopmentTeam = F6Q9WB4KR2;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -203,13 +269,91 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6F231D61E79F10500D545E4 /* Nexa Light.otf in Resources */,
 				D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */,
+				D6999E7D1E395F200023269D /* HockeySDKResources.bundle in Resources */,
 				D60FEB8E1D69A99C00E3D7F2 /* Assets.xcassets in Resources */,
 				D60FEB8C1D69A99C00E3D7F2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E409725EA6E2CB0B62D625D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7711D2B7A39BBB8DD9D4CF9D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6999E731E3950900023269D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run aacf7f91fd33f2ca187be1bacb93035f068ec4ae 0b67a11b6a63362d2698b06ed0183007a6effa03c78c6ea4675cd2f75f28a208";
+			showEnvVarsInLog = 0;
+		};
+		D6999E781E395F0A0023269D /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "FILE=\"${SRCROOT}/HockeySDK-iOS/BuildAgent\"\nif [ -f \"$FILE\" ]; then\n\"$FILE\"\nfi";
+		};
+		E15F7CA21C76748D92B120FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D60FEB7F1D69A99900E3D7F2 /* Sources */ = {
@@ -219,6 +363,7 @@
 				D60FEB891D69A99C00E3D7F2 /* CameraViewController.swift in Sources */,
 				D6E9BFEF1D80615600A4029B /* CaptureProcessor.swift in Sources */,
 				D64FE62E1DBD27EF006F4988 /* StripCamSettings.swift in Sources */,
+				D60DFA711E80A201007EA7D1 /* AboutViewController.swift in Sources */,
 				D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */,
 				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
 				D62B24801D9AD1C700D73FA0 /* CameraSettings.swift in Sources */,
@@ -233,8 +378,10 @@
 				D69733C91D8042A30035F833 /* CameraController.swift in Sources */,
 				D62B247E1D9AD14300D73FA0 /* TileCamSettings.swift in Sources */,
 				D66D3C781DA66C1700A2D668 /* GabageCamera.swift in Sources */,
+				D69663D21E843FD50080955F /* AppSettings.swift in Sources */,
 				D64FE62C1DBD27AF006F4988 /* StripCam.swift in Sources */,
 				D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */,
+				D6AE822F1E7B171300EA6DE4 /* DoneCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +410,7 @@
 		D60FEB931D69A99C00E3D7F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -297,18 +444,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/**";
 			};
 			name = Debug;
 		};
 		D60FEB941D69A99C00E3D7F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -336,39 +485,57 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "${PODS_ROOT}/**";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		D60FEB961D69A99C00E3D7F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC31C8A865BF1308D340D163 /* Pods-GarbageCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = F6Q9WB4KR2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = GarbageCam/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "bcc3c3f5-9595-45bc-9ac4-3ec865efe38d";
+				PROVISIONING_PROFILE_SPECIFIER = "Garbage Cam Development";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		D60FEB971D69A99C00E3D7F2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28301172C489351E59ECAEEB /* Pods-GarbageCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = F6Q9WB4KR2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework",
+				);
 				INFOPLIST_FILE = GarbageCam/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
+				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6df16abd-2ccf-467f-a9e5-17fb1388dab2";
+				PROVISIONING_PROFILE_SPECIFIER = "GarbageCam Beta Distribution";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

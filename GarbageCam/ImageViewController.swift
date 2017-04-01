@@ -24,6 +24,21 @@ class ImageViewController: UIViewController {
         self.mImageSaver?.onSaved()
     }
     
+    @IBAction func shareClicked(_ sender: UIButton) {
+        if let image = mImageTaken {
+            let text = "#GarbageCam"
+            let activityViewController = UIActivityViewController(activityItems: [image, text], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            activityViewController.completionWithItemsHandler = {(activityType, completed, returnedItems, error) in
+                if (completed) {
+                    self.mImageSaver?.onSaved()
+                }
+            }
+
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let image = mImageTaken {

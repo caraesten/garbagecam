@@ -10,14 +10,21 @@ import UIKit
 import AVFoundation
 import CoreVideo
 import CoreGraphics
+import MBCircularProgressBar
+import Crashlytics
 
 class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate, CaptureSettingsDelegate {
+
     var mCameraController: CameraController?
         
     var mSaveDialog: ImageViewController?
     
+    @IBOutlet var mCameraButton: UIButton!
+    @IBOutlet var mFpsLabel: UILabel!
+    
     var mSettingsDialog: CaptureSettingsViewController?
     
+    @IBOutlet var mProgressView: MBCircularProgressBarView!
     var mCurrentCameraId: Int?
     
     @IBOutlet var mRecordingButton: UIButton?
@@ -27,19 +34,20 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             self.mCameraController?.tearDownPreview(self.view)
             self.mCameraController?.stopSession()
             
-            // TODO: persist settings per camera
             let camera: GarbageCamera
             if (self.mCurrentCameraId == TileCam.ID) {
-                camera = StripCam()
+                let settings = StripCamSettings()
+                camera = settings.makeCamera(settings:settings.getDefaultSettings())
             } else {
-                camera = TileCam(columns: 40, rows: 40, randomCapture: false)
+                let settings = TileCamSettings()
+                camera = settings.makeCamera(settings:settings.getDefaultSettings())
             }
             self.mCurrentCameraId = camera.id
             sender.setNeedsLayout()
             
             self.mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
             DispatchQueue.main.async {
-                sender.titleLabel?.text = camera.title
+                sender.setTitle(camera.title, for: .normal)
                 self.mCameraController!.setupSession(self.view)
                 self.mCameraController!.startSession()
             }
@@ -61,6 +69,9 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         }
     }
     
+    @IBAction func switchCameraClicked(_ sender: UIButton) {
+        mCameraController?.switchCamera()
+    }
     @IBAction func settingsClicked(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "CaptureSettingsViewController") as! CaptureSettingsViewController
@@ -73,7 +84,6 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     func setButtonRecordingOff() {
         if let button = mRecordingButton {
-            // TODO: this is still not working sometimes, no clue why
             CATransaction.begin()
             button.layer.removeAllAnimations()
             CATransaction.commit()
@@ -83,6 +93,9 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     }
     
     func setButtonRecordingOn() {
+        if let cameraButton = mCameraButton {
+            cameraButton.isEnabled = false
+        }
         if let button = mRecordingButton {
             button.setImage(UIImage(named: "novideo"), for: UIControlState())
             UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .beginFromCurrentState, .allowUserInteraction], animations: {() in
@@ -95,18 +108,25 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         super.viewDidLoad()
         /*mCameraController = CameraController(processor: StripProcessor(), captureProcessor: StripCaptureProcessor(), delegate: self, queueName: "com.estenh.GarbageCameraQueue")*/
 
-        let camera = TileCam(columns: 40, rows: 40, randomCapture: false)
+        let settings = TileCamSettings()
+        let camera = settings.makeCamera(settings: settings.getDefaultSettings())
         // For grid capture
         mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
          //*/
         // Do any additional setup after loading the view, typically from a nib.
         mCurrentCameraId = camera.id
         mCameraController!.setupSession(self.view)
+        mProgressView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         mCameraController!.startSession()
+        
+        // This is garbage, garbageeee
+        if let cameraButton = mCameraButton {
+            cameraButton.isEnabled = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,7 +136,24 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     func onRecordingFinished() {
         setButtonRecordingOff()
+        mProgressView.value = 0
+        mProgressView.isHidden = true
+        mProgressView.setNeedsDisplay()
         showSaveDialog()
+    }
+    
+    func onRecordingProgress(percent: Float) {
+        if let cameraController = mCameraController {
+            if (cameraController.isRecording()) {
+                mProgressView.isHidden = false
+                let decimalPercent = 100 * percent
+                mProgressView.value = CGFloat(decimalPercent)
+            }
+        }
+    }
+    
+    func onCameraPrepared(fps: Float) {
+        mFpsLabel.text = "\(Int(round(fps)))FPS"
     }
     
     func showSaveDialog() {
@@ -140,6 +177,16 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     }
     
     func photoSaved(_ photo: UIImage, didFinishSavingWithError: NSError?, contextInfo:UnsafeRawPointer) {
+        if let error = didFinishSavingWithError {
+            if (error.localizedDescription.characters.count > 0) {
+                if (AppSettings.isDebug()) {
+                    let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            Crashlytics.sharedInstance().recordError(error)
+        }
         onDismissed()
     }
     
@@ -161,7 +208,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         DispatchQueue.global(qos: .default).async {
             self.mCameraController?.tearDownPreview(self.view)
             self.mCameraController?.stopSession()
-            self.mCameraController = CameraController(camera: settingsManager.makeCamera(settings: settings), delegate: self, queueName: "com.estenh.GarbageCameraQueue")
+            self.mCameraController = CameraController.make(camera: settingsManager.makeCamera(settings: settings), delegate: self, controller: self.mCameraController, queueName: "com.estenh.GarbageCameraQueue")
             DispatchQueue.main.async {
                 self.mCameraController!.setupSession(self.view)
                 self.mCameraController!.startSession()

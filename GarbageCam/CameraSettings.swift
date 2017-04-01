@@ -18,6 +18,10 @@ class CameraSettings {
         return [("", "")]
     }
     
+    func getCurrentSettings() -> [SettingId: OptionId] {
+        return ["":""]
+    }
+    
     func getOptionsForSetting(id: SettingId) -> [(OptionId, String)]? {
         return [("", "")]
     }
@@ -27,7 +31,35 @@ class CameraSettings {
     }
     
     func getDefaultSettings() -> [SettingId: OptionId] {
-        return ["":""]
+        /* var dictionary = [SettingId: OptionId]()
+        for (k, _) in getSettings() {
+            let option: OptionId
+            if let defaultsOption = UserDefaults.standard.value(forKey: k) as? String {
+                option = defaultsOption
+            } else {
+                option = (getDefaultOptionForSetting(id: k)?.0) ?? ""
+            }
+            dictionary[k] = option
+        }
+        return dictionary */
+        return getSettings().reduce([SettingId:OptionId]()) { (dict, tuple) in
+            var mutableDict = dict
+            let k = tuple.0
+            let option: OptionId
+            if let defaultsOption = UserDefaults.standard.value(forKey: k) as? String {
+                option = defaultsOption
+            } else {
+                option = (getDefaultOptionForSetting(id: k)?.0) ?? ""
+            }
+            mutableDict[k] = option
+            return mutableDict
+        }
+    }
+    
+    func saveSettings(settings: [SettingId: OptionId]) {
+        for (key, value) in settings {
+            UserDefaults.standard.setValue(value, forKey: key)
+        }
     }
     
     func makeCamera(settings: [CameraSettings.SettingId: CameraSettings.OptionId]) -> GarbageCamera {

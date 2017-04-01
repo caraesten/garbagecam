@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 
-class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SettingsUpdatedDelegate {
+class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SettingsUpdatedDelegate, SettingsDoneDelegate {
     
     var settings: CameraSettings? = nil {
         didSet {
-            // TODO: Update this with whatever the user has set otherwise this'll get p annoying
             selectedSettings = settings?.getDefaultSettings()
         }
     }
@@ -24,9 +23,6 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBOutlet var tableView: UITableView!
     
-    @IBAction func doneClicked(_ sender: UIButton) {
-        delegate?.onSettingsFinished(settingsManager: settings!, settings: selectedSettings!)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,33 +40,52 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return settings?.getSettings().count ?? 0
+            return (settings?.getSettings().count ?? 0) + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: SettingsCell
-        if let settingsCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell? {
-            cell = settingsCell
+        let cell: UITableViewCell
+        if (indexPath.row < (settings?.getSettings().count) ?? 0) {
+            let sCell: SettingsCell
+            if let settingsCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell? {
+                sCell = settingsCell
+            } else {
+                sCell = SettingsCell(style:UITableViewCellStyle.default, reuseIdentifier:"SettingsCell")
+            }
+            sCell.initializeCell(title: "", settingId: "", options: [], defaultOption: "", delegate: self)
+            if let camSettings = settings {
+                let allSettings = camSettings.getSettings()
+                let setting = allSettings[indexPath.row]
+                
+                // TODO: make this into a struct, tuple is not great
+                let id = setting.0
+                let title = setting.1
+                
+                let options = camSettings.getOptionsForSetting(id: id)!
+                let defaultSetting = selectedSettings?[id]
+                
+                sCell.initializeCell(title: title, settingId: id, options: options, defaultOption:defaultSetting ?? "", delegate: self)
+            }
+            cell = sCell
         } else {
-            cell = SettingsCell(style:UITableViewCellStyle.default, reuseIdentifier:"SettingsCell")
-        }
-        cell.initializeCell(title: "", settingId: "", options: [], delegate: self)
-        if let camSettings = settings {
-            let allSettings = camSettings.getSettings()
-            let setting = allSettings[indexPath.row]
-            
-            // TODO: lol make this into a struct, tuple is not great
-            let id = setting.0
-            let title = setting.1
-            
-            let options = camSettings.getOptionsForSetting(id: id)!
-            
-            cell.initializeCell(title: title, settingId: id, options: options, delegate: self)
+            let dCell: DoneCell
+            if let doneCell = tableView.dequeueReusableCell(withIdentifier: "DoneCell") as! DoneCell? {
+                dCell = doneCell
+            } else {
+                dCell = DoneCell(style: UITableViewCellStyle.default, reuseIdentifier: "DoneCell")
+            }
+            dCell.setDelegate(delegate: self)
+            cell = dCell
         }
         return cell
     }
     
     func updatedSetting(settingId: CameraSettings.SettingId, optionId: CameraSettings.OptionId) {
         selectedSettings?[settingId] = optionId
+    }
+    
+    func onDone() {
+        settings?.saveSettings(settings: selectedSettings ?? [:])
+        delegate?.onSettingsFinished(settingsManager: settings!, settings: selectedSettings!)
     }
 }
 
