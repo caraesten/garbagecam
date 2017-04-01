@@ -13,15 +13,15 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
     
     var settings: CameraSettings? = nil {
         didSet {
-            selectedSettings = settings?.getDefaultSettings()
+            mSelectedSettings = settings?.getDefaultSettings()
         }
     }
     
     var delegate: CaptureSettingsDelegate? = nil
     
-    var selectedSettings: [CameraSettings.SettingId: CameraSettings.OptionId]? = nil
+    fileprivate var mSelectedSettings: [CameraSettings.SettingId: CameraSettings.OptionId]? = nil
     
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet fileprivate var mTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,8 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
         visualEffectView.frame = self.view.bounds
 
         self.view.insertSubview(visualEffectView, at: 0)
-        tableView.dataSource = self
-        tableView.delegate = self
+        mTableView.dataSource = self
+        mTableView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,7 +61,7 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
                 let title = setting.1
                 
                 let options = camSettings.getOptionsForSetting(id: id)!
-                let defaultSetting = selectedSettings?[id]
+                let defaultSetting = mSelectedSettings?[id]
                 
                 sCell.initializeCell(title: title, settingId: id, options: options, defaultOption:defaultSetting ?? "", delegate: self)
             }
@@ -80,12 +80,12 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func updatedSetting(settingId: CameraSettings.SettingId, optionId: CameraSettings.OptionId) {
-        selectedSettings?[settingId] = optionId
+        mSelectedSettings?[settingId] = optionId
     }
     
     func onDone() {
-        settings?.saveSettings(settings: selectedSettings ?? [:])
-        delegate?.onSettingsFinished(settingsManager: settings!, settings: selectedSettings!)
+        settings?.saveSettings(settings: mSelectedSettings ?? [:])
+        delegate?.onSettingsFinished(settingsManager: settings!, settings: mSelectedSettings!)
     }
 }
 

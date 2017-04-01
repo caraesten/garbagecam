@@ -14,7 +14,7 @@ import CoreImage
 // A capture processor describes which parts of the hardware image buffer to capture
 // as a UIImage. By default, captures the whole image.
 class CaptureProcessor {
-    let ciContext = CIContext(options: [kCIContextPriorityRequestLow: true])
+    fileprivate let mCiContext = CIContext(options: [kCIContextPriorityRequestLow: true])
     
     func process(_ sampleBuffer: CMSampleBuffer, frameCount: Int) -> UIImage {
         let buf = CMSampleBufferGetImageBuffer(sampleBuffer)!
@@ -33,7 +33,7 @@ class CaptureProcessor {
             )
         )
         
-        let cgImg = ciContext.createCGImage(cropped, from: cropped.extent)
+        let cgImg = mCiContext.createCGImage(cropped, from: cropped.extent)
 
         let img = UIImage(cgImage: cgImg!, scale:1, orientation:.up)
         
