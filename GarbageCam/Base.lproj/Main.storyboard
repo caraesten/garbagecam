@@ -227,7 +227,7 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="tableView" destination="TW5-KM-6NT" id="LC3-KQ-CcC"/>
+                        <outlet property="mTableView" destination="TW5-KM-6NT" id="hGR-hV-vrq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PAw-gH-72a" userLabel="First Responder" sceneMemberID="firstResponder"/>
