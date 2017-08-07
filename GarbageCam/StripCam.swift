@@ -11,7 +11,7 @@ import GameKit
 
 struct StripCam: GarbageCamera {
     static let ID = 1
-    static let TITLE = "Strip"
+    static let TITLE = "STRIP"
     var captureProcessor: CaptureProcessor
     var imageProcessor: ImageProcessor
     var settings: CameraSettings

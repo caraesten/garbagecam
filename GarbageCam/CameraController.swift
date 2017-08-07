@@ -284,6 +284,10 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             DispatchQueue.main.async {
                 self.mDelegate.onRecordingProgress(percent: progress)
             }
+        } else if (!isDone) {
+            DispatchQueue.main.async {
+                self.mDelegate.onRecordingProgress(frames: self.mCurrentData.count)
+            }
         }
         
         if (mIsRecording && isDone) {
@@ -312,6 +316,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
 
 protocol CameraEventDelegate {
     func onRecordingProgress(percent: Float)
+    func onRecordingProgress(frames: Int)
     func onRecordingFinished()
     func onCameraPrepared(fps: Float)
 }

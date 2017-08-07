@@ -24,6 +24,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     var mSettingsDialog: CaptureSettingsViewController?
     
+    @IBOutlet var mIndeterminateProgressView: UILabel!
     @IBOutlet var mProgressView: MBCircularProgressBarView!
     var mCurrentCameraId: Int?
     
@@ -47,7 +48,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             
             self.mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
             DispatchQueue.main.async {
-                sender.setTitle(camera.title, for: .normal)
+                sender.setTitle("\(camera.title) >", for: .normal)
                 self.mCameraController!.setupSession(self.view)
                 self.mCameraController!.startSession()
             }
@@ -117,6 +118,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         mCurrentCameraId = camera.id
         mCameraController!.setupSession(self.view)
         mProgressView.isHidden = true
+        mIndeterminateProgressView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,15 +141,47 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         mProgressView.value = 0
         mProgressView.isHidden = true
         mProgressView.setNeedsDisplay()
+        
+        mIndeterminateProgressView.text = ""
+        mIndeterminateProgressView.isHidden = true
+        mIndeterminateProgressView.setNeedsDisplay()
+
         showSaveDialog()
     }
     
     func onRecordingProgress(percent: Float) {
+        if (percent == 0) { return }
         if let cameraController = mCameraController {
             if (cameraController.isRecording()) {
                 mProgressView.isHidden = false
                 let decimalPercent = 100 * percent
                 mProgressView.value = CGFloat(decimalPercent)
+            }
+        }
+    }
+    
+    func onRecordingProgress(frames: Int) {
+        if (frames == 0) { return }
+        if let cameraController = mCameraController {
+            if (cameraController.isRecording() && mProgressView.isHidden) {
+                mIndeterminateProgressView.isHidden = false
+                // TODO: Discover this programmatically
+                let height = 1440
+                let size = "\(frames)x\(height)px"
+                let textColor: UIColor
+                let descriptor: String
+                if (Double(frames) < Double(height) * 0.8) {
+                    textColor = UIColor.red
+                    descriptor = "too small"
+                } else if (Double(frames) < Double(height) * 1.2) {
+                    textColor = UIColor.orange
+                    descriptor = "okay"
+                } else {
+                    textColor = UIColor.green
+                    descriptor = "good"
+                }
+                mIndeterminateProgressView.textColor = textColor
+                mIndeterminateProgressView.text = "\(size)\n(\(descriptor))"
             }
         }
     }
