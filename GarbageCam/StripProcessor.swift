@@ -12,7 +12,10 @@ import CoreGraphics
 
 class StripProcessor: ImageProcessor {
     override func process(_ imageSet: [UIImage]) -> UIImage {
-        let size = CGSize(width: CGFloat(imageSet.count), height: 1280)
+        if (imageSet.count == 0) {
+            return UIImage()
+        }
+        let size = CGSize(width: CGFloat(imageSet.count), height: (imageSet.first?.size.height)!)
         UIGraphicsBeginImageContext(size)
         for (index, img) in imageSet.enumerated() {
             img.draw(at: CGPoint(x: index,y: 0))

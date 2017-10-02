@@ -16,6 +16,7 @@
 		D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D60FEB8F1D69A99C00E3D7F2 /* LaunchScreen.storyboard */; };
 		D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */; };
 		D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */; };
+		D6124CD01F788CCB004F7DEE /* SLColorArt.m in Sources */ = {isa = PBXBuildFile; fileRef = D6124CCF1F788CCB004F7DEE /* SLColorArt.m */; };
 		D619A7371D8BD1DA004F498A /* TileCaptureProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D619A7361D8BD1DA004F498A /* TileCaptureProcessor.swift */; };
 		D619A7391D8BD9D4004F498A /* TileProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D619A7381D8BD9D4004F498A /* TileProcessor.swift */; };
 		D62B247A1D9AAF2100D73FA0 /* CaptureSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B24791D9AAF2100D73FA0 /* CaptureSettingsViewController.swift */; };
@@ -57,6 +58,9 @@
 		D60FEB921D69A99C00E3D7F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D60FEB981D69AE5D00E3D7F2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D60FEB9A1D69B85500E3D7F2 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		D6124CCA1F788AA0004F7DEE /* GarbageCam-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GarbageCam-Bridging-Header.h"; sourceTree = "<group>"; };
+		D6124CCE1F788CC0004F7DEE /* SLColorArt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SLColorArt.h; sourceTree = "<group>"; };
+		D6124CCF1F788CCB004F7DEE /* SLColorArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLColorArt.m; sourceTree = "<group>"; };
 		D619A7361D8BD1DA004F498A /* TileCaptureProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileCaptureProcessor.swift; sourceTree = "<group>"; };
 		D619A7381D8BD9D4004F498A /* TileProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TileProcessor.swift; sourceTree = "<group>"; };
 		D62B24791D9AAF2100D73FA0 /* CaptureSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureSettingsViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				D619A7341D8BD1A0004F498A /* StripCam */,
 				D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */,
 				D60FEB881D69A99C00E3D7F2 /* CameraViewController.swift */,
+				D6124CCF1F788CCB004F7DEE /* SLColorArt.m */,
+				D6124CCE1F788CC0004F7DEE /* SLColorArt.h */,
 				D60DFA701E80A201007EA7D1 /* AboutViewController.swift */,
 				D62B24791D9AAF2100D73FA0 /* CaptureSettingsViewController.swift */,
 				D690B24A1D6A12A000F0760D /* ImageViewController.swift */,
@@ -167,6 +173,7 @@
 				D62B247F1D9AD1C700D73FA0 /* CameraSettings.swift */,
 				D66D3C771DA66C1700A2D668 /* GabageCamera.swift */,
 				D69663D11E843FD50080955F /* AppSettings.swift */,
+				D6124CCA1F788AA0004F7DEE /* GarbageCam-Bridging-Header.h */,
 			);
 			path = GarbageCam;
 			sourceTree = "<group>";
@@ -241,8 +248,8 @@
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = F6Q9WB4KR2;
-						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -365,6 +372,7 @@
 				D64FE62E1DBD27EF006F4988 /* StripCamSettings.swift in Sources */,
 				D60DFA711E80A201007EA7D1 /* AboutViewController.swift in Sources */,
 				D690B24B1D6A12A000F0760D /* ImageViewController.swift in Sources */,
+				D6124CD01F788CCB004F7DEE /* SLColorArt.m in Sources */,
 				D69733CB1D8048EB0035F833 /* ImageProcessor.swift in Sources */,
 				D62B24801D9AD1C700D73FA0 /* CameraSettings.swift in Sources */,
 				D62B247C1D9AB17D00D73FA0 /* SettingsCell.swift in Sources */,
@@ -499,9 +507,11 @@
 			baseConfigurationReference = AC31C8A865BF1308D340D163 /* Pods-GarbageCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = F6Q9WB4KR2;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -511,8 +521,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
-				PROVISIONING_PROFILE = "bcc3c3f5-9595-45bc-9ac4-3ec865efe38d";
-				PROVISIONING_PROFILE_SPECIFIER = "Garbage Cam Development";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GarbageCam/GarbageCam-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -522,9 +534,11 @@
 			baseConfigurationReference = 28301172C489351E59ECAEEB /* Pods-GarbageCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = F6Q9WB4KR2;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -534,8 +548,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
-				PROVISIONING_PROFILE = "6df16abd-2ccf-467f-a9e5-17fb1388dab2";
-				PROVISIONING_PROFILE_SPECIFIER = "GarbageCam Beta Distribution";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "GarbageCam/GarbageCam-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

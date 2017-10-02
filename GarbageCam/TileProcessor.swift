@@ -21,9 +21,11 @@ class TileProcessor: ImageProcessor {
         mFrameMappings = mappings
     }
     override func process(_ imageSet: [UIImage]) -> UIImage {
-        // TODO: Don't hard-code this
-        let totalWidth = 720
-        let totalHeight = 1280
+        if (imageSet.count == 0) {
+            return UIImage()
+        }
+        let totalWidth = Int((imageSet.first?.size.width)!) * mRows
+        let totalHeight = Int((imageSet.first?.size.height)!) * mColumns
         let size = CGSize(width: CGFloat(totalWidth), height: CGFloat(totalHeight))
         UIGraphicsBeginImageContext(size)
         for (index, img) in imageSet.enumerated() {

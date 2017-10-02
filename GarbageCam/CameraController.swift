@@ -114,6 +114,14 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         return (AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as! [AVCaptureDevice]).first(where: {$0.position == position})
     }
     
+    func getCurrentCaptureHeight() -> CGFloat {
+        if (mCurrentData.count == 0) {
+            return 0
+        } else {
+            return (mCurrentData.first?.size.height)!
+        }
+    }
+    
     func setupSession(_ view: UIView) {
         let maxFps: Float
         if mCaptureDevice == nil {

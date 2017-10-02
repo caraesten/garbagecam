@@ -165,8 +165,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         if let cameraController = mCameraController {
             if (cameraController.isRecording() && mProgressView.isHidden) {
                 mIndeterminateProgressView.isHidden = false
-                // TODO: Discover this programmatically
-                let height = 1440
+                let height = cameraController.getCurrentCaptureHeight()
                 let size = "\(frames)x\(height)px"
                 let textColor: UIColor
                 let descriptor: String
