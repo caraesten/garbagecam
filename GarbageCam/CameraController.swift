@@ -11,7 +11,6 @@ import UIKit
 import AVFoundation
 import CoreVideo
 import CoreGraphics
-import Crashlytics
 
 class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     static let DEFAULT_QUEUE_NAME = "com.estenh.GarbageCameraQueue"
@@ -46,7 +45,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     fileprivate var mPreviewLayer: CALayer?
     
     fileprivate lazy var cameraSession: AVCaptureSession = {
-        let captureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+        let captureDevice = AVCaptureDevice.default(for: .video)
         let s = AVCaptureSession()
         return s
     }()
@@ -92,7 +91,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     func switchCamera() {
         cameraSession.beginConfiguration()
-        cameraSession.sessionPreset = AVCaptureSessionPresetHigh
+        cameraSession.sessionPreset = AVCaptureSession.Preset.high
         if let input = cameraSession.inputs[0] as? AVCaptureDeviceInput {
             cameraSession.removeInput(input)
             if let newCam = getCameraForPosition(position: input.device.position == .back ? .front : .back) {
@@ -104,14 +103,14 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                     cameraSession.commitConfiguration()
                     mDelegate.onCameraPrepared(fps: Float(maxFps))
                 } catch let e as NSError {
-                    Crashlytics.sharedInstance().recordError(e)
+                    // Crashlytics.sharedInstance().recordError(e)
                 }
             }
         }
     }
     
-    func getCameraForPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        return (AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as! [AVCaptureDevice]).first(where: {$0.position == position})
+    func getCameraForPosition(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        return (AVCaptureDevice.devices(for: .video) as! [AVCaptureDevice]).first(where: {$0.position == position})
     }
     
     func getCurrentCaptureHeight() -> CGFloat {
@@ -125,15 +124,16 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     func setupSession(_ view: UIView) {
         let maxFps: Float
         if mCaptureDevice == nil {
-            mCaptureDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
+            mCaptureDevice = AVCaptureDevice.default(for: .video)
         }
+        let captureDevice = mCaptureDevice!
         do {
             NotificationCenter.default.addObserver(forName: NSNotification.Name.AVCaptureSessionRuntimeError, object: nil, queue: nil, using: {
                 (errorNotif: Notification!) -> Void in
                 // TODO: Ideally this would accurately record stack frame
-                Crashlytics.sharedInstance().recordCustomExceptionName("SessionError", reason: errorNotif.description, frameArray: [CLSStackFrame()])
+                /*Crashlytics.sharedInstance().recordCustomExceptionName("SessionError", reason: errorNotif.description, frameArray: [CLSStackFrame()]) */
                 })
-            let input = try AVCaptureDeviceInput(device: mCaptureDevice)
+            let input = try AVCaptureDeviceInput(device: captureDevice)
             cameraSession.beginConfiguration()
             try mCaptureDevice?.lockForConfiguration()
             
@@ -147,14 +147,14 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             }
             
             let dataOut = AVCaptureVideoDataOutput()
-            dataOut.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA as UInt32)]
+            dataOut.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as String) : NSNumber(value: kCVPixelFormatType_32BGRA as UInt32)]
             dataOut.alwaysDiscardsLateVideoFrames = false
             
-            if let outputs = cameraSession.outputs as? [AVCaptureOutput] {
-                if (outputs.count > 0) {
-                    cameraSession.removeOutput(outputs[0])
-                }
+            let outputs = cameraSession.outputs
+            if (outputs.count > 0) {
+                cameraSession.removeOutput(outputs[0])
             }
+        
             if (cameraSession.canAddOutput(dataOut)) {
                 cameraSession.addOutput(dataOut)
             }
@@ -169,7 +169,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 curMax = 0
             }
             mCaptureDevice?.unlockForConfiguration()
-            cameraSession.sessionPreset = AVCaptureSessionPresetHigh
+            cameraSession.sessionPreset = AVCaptureSession.Preset.high
             cameraSession.commitConfiguration()
 
             dataOut.setSampleBufferDelegate(self, queue: mQueue)
@@ -177,7 +177,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             
         } catch let error as NSError {
             maxFps = 0
-            Crashlytics.sharedInstance().recordError(error)
+            // Crashlytics.sharedInstance().recordError(error)
         }
         preparePreviewLayer(view)
         mDelegate.onCameraPrepared(fps: maxFps)
@@ -193,12 +193,12 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             if (rates.maxFrameRate > curMax) {
                 do {
                     try device.lockForConfiguration()
-                    device.activeFormat = format as! AVCaptureDeviceFormat
+                    device.activeFormat = format
                     device.activeVideoMinFrameDuration = rates.minFrameDuration
                     device.activeVideoMaxFrameDuration = rates.maxFrameDuration
                     device.unlockForConfiguration()
                 } catch let error as NSError {
-                    Crashlytics.sharedInstance().recordError(error)
+                    // Crashlytics.sharedInstance().recordError(error)
                 }
                 curMax = rates.maxFrameRate
             }
@@ -213,11 +213,11 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 do {
                     if device.isFocusModeSupported(.locked) {
                         try device.lockForConfiguration()
-                        device.focusMode = AVCaptureFocusMode.locked
+                        device.focusMode = AVCaptureDevice.FocusMode.locked
                         device.unlockForConfiguration()
                     }
                 } catch let error as NSError {
-                    Crashlytics.sharedInstance().recordError(error)
+                    // Crashlytics.sharedInstance().recordError(error)
                 }
             }
             mIsRecording = true
@@ -226,11 +226,11 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 do {
                     if device.isFocusModeSupported(.autoFocus) {
                         try device.lockForConfiguration()
-                        device.focusMode = AVCaptureFocusMode.autoFocus
+                        device.focusMode = AVCaptureDevice.FocusMode.autoFocus
                         device.unlockForConfiguration()
                     }
                 } catch let error as NSError {
-                    Crashlytics.sharedInstance().recordError(error)
+                    // Crashlytics.sharedInstance().recordError(error)
                 }
             }
             mIsRecording = false
@@ -273,7 +273,7 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
                 device.unlockForConfiguration()
                 return newState
             } catch let error as NSError {
-                Crashlytics.sharedInstance().recordError(error)
+                // Crashlytics.sharedInstance().recordError(error)
             }
         }
         return false
@@ -312,13 +312,11 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             oldLayer.removeFromSuperlayer()
         }
         let previewLayer = AVCaptureVideoPreviewLayer(session: self.cameraSession)
-        previewLayer?.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
-        previewLayer?.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        view.layer.insertSublayer(previewLayer!, at: 0)
-        if let preview = previewLayer {
-            mPreviewLayer = preview
-        }
+        previewLayer.bounds = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height)
+        previewLayer.position = CGPoint(x: viewBounds.midX, y: viewBounds.midY)
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        view.layer.insertSublayer(previewLayer, at: 0)
+        mPreviewLayer = previewLayer
     }
 }
 

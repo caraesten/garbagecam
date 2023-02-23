@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import HockeySDK
-import Fabric
-import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,15 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        BITHockeyManager.shared().configure(withIdentifier: "416f8b53414346478ad8b767d09fe02e")
         // Do some additional configuration if needed here
-        BITHockeyManager.shared().start()
-        
-        BITHockeyManager.shared().authenticator.authenticateInstallation()
+
         // Uncomment to clear settings
         /* let appDomain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: appDomain) */
-        Fabric.with([Crashlytics.self])
         return true
     }
 

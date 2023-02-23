@@ -11,7 +11,6 @@ import AVFoundation
 import CoreVideo
 import CoreGraphics
 import MBCircularProgressBar
-import Crashlytics
 
 class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDelegate, CaptureSettingsDelegate {
 
@@ -209,16 +208,16 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
         }
     }
     
-    func photoSaved(_ photo: UIImage, didFinishSavingWithError: NSError?, contextInfo:UnsafeRawPointer) {
+    @objc func photoSaved(_ photo: UIImage, didFinishSavingWithError: NSError?, contextInfo:UnsafeRawPointer) {
         if let error = didFinishSavingWithError {
-            if (error.localizedDescription.characters.count > 0) {
+            if (error.localizedDescription.count > 0) {
                 if (AppSettings.isDebug()) {
                     let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-            Crashlytics.sharedInstance().recordError(error)
+            // Crashlytics.sharedInstance().recordError(error)
         }
         onDismissed()
     }
