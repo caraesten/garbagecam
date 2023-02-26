@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		494264A729ABF29000536EF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 494264A629ABF29000536EF7 /* GoogleService-Info.plist */; };
+		494264AA29ABF34E00536EF7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 494264A929ABF34E00536EF7 /* FirebaseAnalytics */; };
+		494264AC29ABF34E00536EF7 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 494264AB29ABF34E00536EF7 /* FirebaseAnalyticsSwift */; };
+		494264AE29ABF34E00536EF7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 494264AD29ABF34E00536EF7 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		494264B029ABF34E00536EF7 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 494264AF29ABF34E00536EF7 /* FirebaseCrashlytics */; };
 		8F69BB4D1AF401E01087B43E /* Pods_GarbageCam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB9731F02E036D859C70036 /* Pods_GarbageCam.framework */; };
 		D60DFA711E80A201007EA7D1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60DFA701E80A201007EA7D1 /* AboutViewController.swift */; };
 		D60FEB871D69A99C00E3D7F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */; };
@@ -43,6 +48,7 @@
 /* Begin PBXFileReference section */
 		28301172C489351E59ECAEEB /* Pods-GarbageCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarbageCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam.release.xcconfig"; sourceTree = "<group>"; };
 		2AB9731F02E036D859C70036 /* Pods_GarbageCam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GarbageCam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		494264A629ABF29000536EF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AC31C8A865BF1308D340D163 /* Pods-GarbageCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GarbageCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GarbageCam/Pods-GarbageCam.debug.xcconfig"; sourceTree = "<group>"; };
 		D60DFA701E80A201007EA7D1 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		D60FEB831D69A99900E3D7F2 /* GarbageCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GarbageCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,9 +91,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494264AC29ABF34E00536EF7 /* FirebaseAnalyticsSwift in Frameworks */,
 				D659CAA21D69CE6500509DE4 /* CoreGraphics.framework in Frameworks */,
 				D60FEB9B1D69B85500E3D7F2 /* CoreVideo.framework in Frameworks */,
 				D60FEB991D69AE5D00E3D7F2 /* AVFoundation.framework in Frameworks */,
+				494264AE29ABF34E00536EF7 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				494264B029ABF34E00536EF7 /* FirebaseCrashlytics in Frameworks */,
+				494264AA29ABF34E00536EF7 /* FirebaseAnalytics in Frameworks */,
 				8F69BB4D1AF401E01087B43E /* Pods_GarbageCam.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +146,7 @@
 		D60FEB851D69A99C00E3D7F2 /* GarbageCam */ = {
 			isa = PBXGroup;
 			children = (
+				494264A629ABF29000536EF7 /* GoogleService-Info.plist */,
 				D619A7351D8BD1BC004F498A /* TileCam */,
 				D619A7341D8BD1A0004F498A /* StripCam */,
 				D60FEB861D69A99C00E3D7F2 /* AppDelegate.swift */,
@@ -206,6 +217,12 @@
 			dependencies = (
 			);
 			name = GarbageCam;
+			packageProductDependencies = (
+				494264A929ABF34E00536EF7 /* FirebaseAnalytics */,
+				494264AB29ABF34E00536EF7 /* FirebaseAnalyticsSwift */,
+				494264AD29ABF34E00536EF7 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				494264AF29ABF34E00536EF7 /* FirebaseCrashlytics */,
+			);
 			productName = GarbageCam;
 			productReference = D60FEB831D69A99900E3D7F2 /* GarbageCam.app */;
 			productType = "com.apple.product-type.application";
@@ -222,9 +239,7 @@
 				TargetAttributes = {
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = F6Q9WB4KR2;
 						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -238,6 +253,9 @@
 				Base,
 			);
 			mainGroup = D60FEB7A1D69A99900E3D7F2;
+			packageReferences = (
+				494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = D60FEB841D69A99900E3D7F2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -254,6 +272,7 @@
 			files = (
 				D6F231D61E79F10500D545E4 /* Nexa Light.otf in Resources */,
 				D60FEB911D69A99C00E3D7F2 /* LaunchScreen.storyboard in Resources */,
+				494264A729ABF29000536EF7 /* GoogleService-Info.plist in Resources */,
 				D60FEB8E1D69A99C00E3D7F2 /* Assets.xcassets in Resources */,
 				D60FEB8C1D69A99C00E3D7F2 /* Main.storyboard in Resources */,
 			);
@@ -476,8 +495,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F6Q9WB4KR2;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = F6Q9WB4KR2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -485,11 +506,17 @@
 				);
 				INFOPLIST_FILE = GarbageCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"$(PROJECT_DIR)/Pods",
+				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Garbage Cam Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "GarbageCam/GarbageCam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -505,6 +532,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = F6Q9WB4KR2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,7 +541,12 @@
 				);
 				INFOPLIST_FILE = GarbageCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Pods";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"$(PROJECT_DIR)/Pods",
+				);
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.estenhurtle.garbageCam1;
 				PRODUCT_NAME = GarbageCam;
 				PROVISIONING_PROFILE = "";
@@ -545,6 +578,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		494264A929ABF34E00536EF7 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		494264AB29ABF34E00536EF7 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		494264AD29ABF34E00536EF7 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		494264AF29ABF34E00536EF7 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 494264A829ABF34E00536EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D60FEB7B1D69A99900E3D7F2 /* Project object */;
 }

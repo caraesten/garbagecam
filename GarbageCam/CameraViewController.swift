@@ -30,8 +30,8 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     @IBOutlet var mRecordingButton: UIButton?
     
     @IBAction func onModeTouch(_ sender: UIButton) {
+        self.mCameraController?.tearDownPreview(self.view)
         DispatchQueue.global(qos: .default).async {
-            self.mCameraController?.tearDownPreview(self.view)
             self.mCameraController?.stopSession()
             
             let camera: GarbageCamera
@@ -43,10 +43,10 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
                 camera = settings.makeCamera(settings:settings.getDefaultSettings())
             }
             self.mCurrentCameraId = camera.id
-            sender.setNeedsLayout()
             
             self.mCameraController = CameraController(camera: camera, delegate: self, queueName: "com.estenh.GarbageCameraQueue")
             DispatchQueue.main.async {
+                sender.setNeedsLayout()
                 sender.setTitle("\(camera.title) >", for: .normal)
                 self.mCameraController!.setupSession(self.view)
                 self.mCameraController!.startSession()
@@ -122,7 +122,6 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mCameraController!.startSession()
         
         // This is garbage, garbageeee
         if let cameraButton = mCameraButton {
@@ -186,6 +185,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     
     func onCameraPrepared(fps: Float) {
         mFpsLabel.text = "\(Int(round(fps)))FPS"
+        mCameraController?.startSession()
     }
     
     func showSaveDialog() {
@@ -237,13 +237,12 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
     }
     
     func restartCamera(settingsManager: CameraSettings, settings: [CameraSettings.SettingId: CameraSettings.OptionId]) {
+        self.mCameraController?.tearDownPreview(self.view)
         DispatchQueue.global(qos: .default).async {
-            self.mCameraController?.tearDownPreview(self.view)
             self.mCameraController?.stopSession()
             self.mCameraController = CameraController.make(camera: settingsManager.makeCamera(settings: settings), delegate: self, controller: self.mCameraController, queueName: "com.estenh.GarbageCameraQueue")
             DispatchQueue.main.async {
                 self.mCameraController!.setupSession(self.view)
-                self.mCameraController!.startSession()
             }
         }
     }

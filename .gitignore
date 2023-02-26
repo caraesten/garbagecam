@@ -27,6 +27,7 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+GarbageCam/GoogleService-Info.plist
 
 ## Playgrounds
 timeline.xctimeline
