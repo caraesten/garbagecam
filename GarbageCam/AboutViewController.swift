@@ -14,7 +14,7 @@ class AboutViewController: UIViewController {
     @IBAction func twitterClicked(_ sender: UIButton) {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter){
             let twSheet:SLComposeViewController = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-            twSheet.setInitialText("@esten your app is Garbage")
+            twSheet.setInitialText("@caraesten your app is Garbage")
             self.present(twSheet, animated: true, completion: nil)
         } else {
             let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to send a tweet.", preferredStyle: UIAlertControllerStyle.alert)
