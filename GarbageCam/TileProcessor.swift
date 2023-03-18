@@ -28,10 +28,11 @@ class TileProcessor: ImageProcessor {
         let totalHeight = Int((imageSet.first?.size.height)!) * mColumns
         let size = CGSize(width: CGFloat(totalWidth), height: CGFloat(totalHeight))
         UIGraphicsBeginImageContext(size)
+        let imgWidth = totalWidth / mColumns
+        let imgHeight = totalHeight / mRows
+
         for (index, img) in imageSet.enumerated() {
             let mappedIndex = mFrameMappings[index]
-            let imgWidth = totalWidth / mColumns
-            let imgHeight = totalHeight / mRows
             let curColumn = (mappedIndex % mColumns)
             let curRow = mColumns - 1 - mappedIndex / mColumns
             

@@ -33,7 +33,7 @@ class TileCaptureProcessor: CaptureProcessor {
     override func getCaptureOffsetX(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
         let mappedNumber = mFrameMappings[frameNumber]
         let imgWidth = getCaptureWidth(bufWidth)
-        return imgWidth * mappedNumber % bufWidth
+        return imgWidth * (mappedNumber % mColumns)
     }
     
     override func getCaptureOffsetY(_ frameNumber: Int, bufWidth: Int, bufHeight: Int) -> Int {
@@ -43,8 +43,8 @@ class TileCaptureProcessor: CaptureProcessor {
         return min(curRow * imgHeight, bufHeight - imgHeight)
     }
     
-    override func isDone(_ frameCount: Int) -> Bool {
-        return frameCount >= mColumns * mRows
+    override func getMaxSize() -> Int {
+        return mColumns * mRows
     }
     
     override func getProgress(_ frameCount: Int) -> Float {

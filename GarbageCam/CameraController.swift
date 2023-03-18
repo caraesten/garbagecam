@@ -316,8 +316,10 @@ class CameraController: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             finishRecording()
         } else if (mIsRecording) {
             mProcessQueue.async {
-                let img = self.mCaptureProcessor.process(sampleBuffer, frameCount: self.mCurrentData.count)
-                self.mCurrentData.append(img)
+                if (self.mCaptureProcessor.getMaxSize() == -1 || self.mCurrentData.count < self.mCaptureProcessor.getMaxSize()) {
+                    let img = self.mCaptureProcessor.process(sampleBuffer, frameCount: self.mCurrentData.count)
+                    self.mCurrentData.append(img)
+                }
             }
         }
     }

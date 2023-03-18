@@ -26,9 +26,9 @@ struct TileCam: GarbageCamera {
         mColumns = columns
         let frameMappings: [Int]
         if (randomCapture) {
-            frameMappings = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: Array(0...(rows * columns))) as! [Int]
+            frameMappings = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: Array(0...(rows * columns - 1))) as! [Int]
         } else {
-            frameMappings = Array(0...(rows * columns))
+            frameMappings = Array(0...(rows * columns - 1))
         }
         
         captureProcessor = TileCaptureProcessor(columns: mColumns, rows: mRows, mappings: frameMappings)

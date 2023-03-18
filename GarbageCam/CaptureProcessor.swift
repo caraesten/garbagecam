@@ -61,10 +61,16 @@ class CaptureProcessor {
     // TODO: Add frame skip for more interesting grid capture
     func isDone(_ frameCount: Int) -> Bool {
         // Goes until user stops UNLESS overriden
-        return false
+        if (getMaxSize() == -1) { return false } else {
+            return frameCount >= getMaxSize()
+        }
     }
     
     func getProgress(_ frameCount: Int) -> Float {
         return 0;
+    }
+    
+    func getMaxSize() -> Int {
+        return -1;
     }
 }
