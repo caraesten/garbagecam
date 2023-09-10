@@ -17,8 +17,8 @@ class AboutViewController: UIViewController {
             twSheet.setInitialText("@caraesten your app is Garbage")
             self.present(twSheet, animated: true, completion: nil)
         } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to send a tweet.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to send a tweet.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }

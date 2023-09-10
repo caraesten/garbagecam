@@ -49,7 +49,7 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
             if let settingsCell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell") as! SettingsCell? {
                 sCell = settingsCell
             } else {
-                sCell = SettingsCell(style:UITableViewCellStyle.default, reuseIdentifier:"SettingsCell")
+                sCell = SettingsCell(style:UITableViewCell.CellStyle.default, reuseIdentifier:"SettingsCell")
             }
             sCell.initializeCell(title: "", settingId: "", options: [], defaultOption: "", delegate: self)
             if let camSettings = settings {
@@ -71,7 +71,7 @@ class CaptureSettingsViewController: UIViewController, UITableViewDelegate, UITa
             if let doneCell = tableView.dequeueReusableCell(withIdentifier: "DoneCell") as! DoneCell? {
                 dCell = doneCell
             } else {
-                dCell = DoneCell(style: UITableViewCellStyle.default, reuseIdentifier: "DoneCell")
+                dCell = DoneCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "DoneCell")
             }
             dCell.setDelegate(delegate: self)
             cell = dCell

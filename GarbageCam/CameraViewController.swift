@@ -88,7 +88,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             button.layer.removeAllAnimations()
             CATransaction.commit()
             button.alpha = 0.8
-            button.setImage(UIImage(named: "video"), for: UIControlState())
+            button.setImage(UIImage(named: "video"), for: UIControl.State())
         }
     }
     
@@ -97,7 +97,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             cameraButton.isEnabled = false
         }
         if let button = mRecordingButton {
-            button.setImage(UIImage(named: "novideo"), for: UIControlState())
+            button.setImage(UIImage(named: "novideo"), for: UIControl.State())
             UIView.animate(withDuration: 1, delay: 0, options: [.repeat, .autoreverse, .beginFromCurrentState, .allowUserInteraction], animations: {() in
                 button.alpha = 0.5;
                 }, completion: nil)
@@ -213,7 +213,7 @@ class CameraViewController: UIViewController, ImageSaverDelegate, CameraEventDel
             if (error.localizedDescription.count > 0) {
                 if (AppSettings.isDebug()) {
                     let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                 }
             }
