@@ -239,7 +239,7 @@
 				TargetAttributes = {
 					D60FEB821D69A99900E3D7F2 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = "";
 					};
 				};
 			};
@@ -519,7 +519,7 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Garbage Cam Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "GarbageCam/GarbageCam-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -554,7 +554,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Garbage Cam Development";
 				SWIFT_OBJC_BRIDGING_HEADER = "GarbageCam/GarbageCam-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
